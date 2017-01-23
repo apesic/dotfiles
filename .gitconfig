@@ -1,0 +1,32 @@
+[user]
+	email = alexei@liftoff.io
+	name = Alexei Pesic
+[core]
+	excludesfile = /Users/apesic/.gitignore_global
+	editor = /usr/bin/vim
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
+[push]
+	default = simple
+[branch]
+    autosetupmerge = true
+    autosetuprebase = always
+[difftool "sourcetree"]
+        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+        path =
+[mergetool "sourcetree"]
+        cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+        trustExitCode = true
+[alias]
+  s = status
+	co = checkout
+  ec = config --global -e
+  up = !git pull --rebase --prune $@ && git submodule update --init --recursive
+  cob = checkout -b
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  wip = commit -am "WIP"
+  undo = reset HEAD~1 --mixed
+  amend = commit -a --amend
+  upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive

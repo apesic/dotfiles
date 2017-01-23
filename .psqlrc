@@ -1,0 +1,4 @@
+\x auto
+\pset null '∅'
+\set COMP_KEYWORD_CASE upper
+\pset format wrapped

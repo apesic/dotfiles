@@ -1,0 +1,38 @@
+alias g='git'
+alias gs="git status"
+alias gpm="git pull --rebase origin master"
+alias glog="git --no-pager log --graph --all --oneline --color --decorate=short"
+alias gl="glog | head -15"
+
+alias be="bundle exec"
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias -- -="cd -"
+alias C="wc -l"
+function cdl { cd $1; l;}
+function mcd { mkdir $1; cd $1 }
+alias c='fasd_cd -d'
+
+alias vim="mvim"
+alias tvim="mvim -v"
+
+alias postgresstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
+alias postgresstop='pg_ctl -m fast -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
+
+alias j="jq '.'"
+
+alias agc='ag --clojure'
+alias agg='ag --go'
+
+# Helper functions for ansible
+# Return the first host in a hosts group
+function ah {
+  psh -l "=$1" | head -n 1
+}
+
+# SSH to the first host listed in a host group
+function ash {
+  ssh `ah $1`
+}
