@@ -1,1 +1,1 @@
-/Users/apesic/.dotfiles/.vimrc
+.vimrc
