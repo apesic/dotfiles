@@ -13,7 +13,9 @@ alias -- -="cd -"
 alias C="wc -l"
 function cdl { cd $1; l;}
 function mcd { mkdir $1; cd $1 }
-alias c='fasd_cd -d'
+alias c="fasd_cd -d"
+
+alias l="ls -lah"
 
 alias vim="mvim"
 alias tvim="mvim -v"
