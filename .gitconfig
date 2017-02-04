@@ -30,3 +30,5 @@
   undo = reset HEAD~1 --mixed
   amend = commit -a --amend
   upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive
+[commit]
+	template = /Users/apesic/.stCommitMsg

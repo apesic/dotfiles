@@ -1,4 +1,9 @@
+hs.alert.defaultStyle.strokeColor =  {white = 1, alpha = 0}
+hs.alert.defaultStyle.fillColor =  {white = 0.05, alpha = 0.75}
+hs.alert.defaultStyle.radius =  10
+
 require('caffeine')
+--require('vim')
 local keybindings = require('keybindings')
 local audio = require('hs.audiodevice')
 
@@ -18,12 +23,12 @@ function reloadConfig(files)
         hs.reload()
     end
 end
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
+hs.pathwatcher.new(os.getenv("HOME") .. "/dotfiles/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
 ---- Switch apps
 hs.hotkey.bind(mash_app, 'C', function() hs.application.launchOrFocus('Google Chrome') end)
-hs.hotkey.bind(mash_app, 'T', function() hs.application.launchOrFocus('iTerm v3 beta') end)
+hs.hotkey.bind(mash_app, 'T', function() hs.application.launchOrFocus('/Applications/iTerm.app') end)
 hs.hotkey.bind(mash_app, 'V', function() hs.application.launchOrFocus('MacVim') end)
 hs.hotkey.bind(mash_app, 'E', function() hs.application.launchOrFocus('Emacs') end)
 hs.hotkey.bind(mash_app, 'K', function() hs.application.launchOrFocus('Slack') end)
@@ -137,7 +142,7 @@ local workLayout = {
   {"Google Chrome", nil, rightTB, hs.layout.maximized, nil, nil},
   {"MacVim", nil, centerTB, hs.layout.maximized, nil, nil},
   {"Emacs", nil, centerTB, hs.layout.maximized, nil, nil},
-  {"iTerm v3 beta", nil, rightTB, hs.layout.maximized, nil, nil},
+  {"iTerm", nil, rightTB, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
@@ -147,7 +152,7 @@ local laptopLayout = {
   {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
   {"MacVim", nil, laptop, hs.layout.maximized, nil, nil},
   {"Emacs", nil, laptop, hs.layout.maximized, nil, nil},
-  {"iTerm v3 beta", nil, laptop, hs.layout.maximized, nil, nil},
+  {"iTerm", nil, laptop, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
   {"Spotify", nil, laptop, hs.layout.maximized, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.maximized, nil, nil},
@@ -157,7 +162,7 @@ local homeLayout = {
   {"Google Chrome", nil, dellUS, hs.layout.maximized, nil, nil},
   {"MacVim", nil, dellUS, hs.layout.maximized, nil, nil},
   {"Emacs", nil, dellUS, hs.layout.maximized, nil, nil},
-  {"iTerm v3 beta", nil, asusVertical, hs.layout.maximized, nil, nil},
+  {"iTerm", nil, asusVertical, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
@@ -197,14 +202,19 @@ function onScreensChanged()
   end
 end
 
-screenWatcher = hs.screen.watcher.new(onScreensChanged)
+local screenWatcher = hs.screen.watcher.new(onScreensChanged)
 screenWatcher:start()
 
 -- Audio
-function muteAudio()
-  local dev = audio.defaultOutputDevice()
-  return dev and dev:setMuted(true)
+function muteAudio(uid, eventName, scope, eventEl)
+  if eventName == "jack" then
+    hs.audiodevice.findDeviceByUID(uid):setMuted(true)
+    hs.alert.show("Audio muted")
+  end
 end
+
+--hs.audiodevice.watcher.setCallback(muteAudio)
+
 ---- GTD task taker
 
 -- CP'ed from https://github.com/Hammerspoon/hammerspoon/issues/782
@@ -282,6 +292,4 @@ end
 
 -- Using a constantly true doWhile because there's a bug with hs.timer.doEvery that causes it to stop working
 -- after about 50 iterations
-local spotTimer = hs.timer.doWhile(function()
-    return true
-end, setSpotifyTitle)
+local spotTimer = hs.timer.doWhile(function() return true end, setSpotifyTitle)

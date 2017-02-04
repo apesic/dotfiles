@@ -22,6 +22,7 @@ SCRIPTDIR=$(cd `dirname $0` && pwd)
 cd ~
 ln -s $SCRIPTDIR/.aliases .aliases
 ln -s $SCRIPTDIR/.gitconfig .gitconfig
+ln -s $SCRIPTDIR/.spacemacs .spacemacs
 ln -s $SCRIPTDIR/.zshenv .zshenv
 ln -s $SCRIPTDIR/.zshrc .zshrc
 ln -s $SCRIPTDIR/.hammerspoon .hammerspoon

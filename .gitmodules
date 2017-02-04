@@ -49,3 +49,6 @@
 [submodule ".vim/bundle/vim-signify"]
 	path = .vim/bundle/vim-signify
 	url = https://github.com/mhinz/vim-signify.git
+[submodule ".vim/bundle/vimpager"]
+	path = .vim/bundle/vimpager
+	url = https://github.com/rkitover/vimpager.git

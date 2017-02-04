@@ -1,6 +1,6 @@
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 COMPLETION_WAITING_DOTS="true"
@@ -15,6 +15,8 @@ fi
 eval "$(fasd --init zsh-hook zsh-wcomp-install zsh-wcomp posix-alias)"
 
 source ~/.aliases
+
+eval "$(rbenv init -)"
 
 # Needed in Sierra to re-init ssh agent in each session
 { eval `ssh-agent`; ssh-add -A; } &>/dev/null
@@ -57,6 +59,10 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM=xterm-256color
+
+function = () {
+/usr/share/vim/vim74/macros/less.sh "$*"
+}
 
 # PROMPT
 #

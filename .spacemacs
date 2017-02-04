@@ -41,7 +41,10 @@ values."
      html
      ansible
      osx
-     python
+     (python :variables
+             python-enable-yapf-format-on-save t
+             python-sort-imports-on-save t
+             python-fill-column 110)
      ruby
      sql
      yaml
@@ -118,7 +121,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Roboto Mono for Powerline"
                                :size 12
                                :weight normal
                                :width normal
@@ -355,6 +358,7 @@ you should place your code here."
                 'comint-previous-input)
               (define-key inferior-octave-mode-map [down]
                 'comint-next-input)))
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -369,7 +373,7 @@ you should place your code here."
  '(fci-rule-color "#232A2F" t)
  '(package-selected-packages
    (quote
-    (wgrep smex ivy-hydra counsel-projectile counsel swiper ivy yapfify uuidgen rake py-isort pug-mode ox-gfm osx-dictionary org-projectile org-download minitest livid-mode skewer-mode simple-httpd live-py-mode link-hint jinja2-mode hide-comnt go-guru git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump company-emacs-eclim column-enforce-mode clojure-snippets request powerline pcre2el markdown-mode js2-mode projectile git-gutter flycheck iedit tern go-mode hydra inflections multiple-cursors cider spinner clojure-mode auto-complete inf-ruby anaconda-mode company highlight anzu smartparens yasnippet helm helm-core magit magit-popup git-commit with-editor async f s dash package-build bind-key bind-map evil eclim alect-themes yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package toc-org tagedit sql-indent spacemacs-theme spaceline smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pbcopy paradox page-break-lines osx-trash orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-paredit evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-easymotion evil-args evil-anzu emmet-mode elisp-slime-nav diff-hl define-word cython-mode company-web company-tern company-statistics company-quickhelp company-go company-anaconda coffee-mode clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aurora-theme ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (org alert log4e gntp json-snatcher json-reformat parent-mode haml-mode gitignore-mode fringe-helper git-gutter+ pos-tip flx goto-chg undo-tree diminish web-completion-data dash-functional edn paredit peg eval-sexp-fu seq queue pkg-info epl packed pythonic avy popup wgrep smex ivy-hydra counsel-projectile counsel swiper ivy yapfify uuidgen rake py-isort pug-mode ox-gfm osx-dictionary org-projectile org-download minitest livid-mode skewer-mode simple-httpd live-py-mode link-hint jinja2-mode hide-comnt go-guru git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump company-emacs-eclim column-enforce-mode clojure-snippets request powerline pcre2el markdown-mode js2-mode projectile git-gutter flycheck iedit tern go-mode hydra inflections multiple-cursors cider spinner clojure-mode auto-complete inf-ruby anaconda-mode company highlight anzu smartparens yasnippet helm helm-core magit magit-popup git-commit with-editor async f s dash package-build bind-key bind-map evil eclim alect-themes yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package toc-org tagedit sql-indent spacemacs-theme spaceline smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pbcopy paradox page-break-lines osx-trash orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-paredit evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-easymotion evil-args evil-anzu emmet-mode elisp-slime-nav diff-hl define-word cython-mode company-web company-tern company-statistics company-quickhelp company-go company-anaconda coffee-mode clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aurora-theme ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(vc-annotate-background "#2B3B40")
  '(vc-annotate-color-map
    (quote
