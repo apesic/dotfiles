@@ -30,3 +30,4 @@ ln -s $SCRIPTDIR/.psqlrc .psqlrc
 ln -s $SCRIPTDIR/.vim .vim
 ln -s $SCRIPTDIR/.iterm2 .iterm2
 ln -s $SCRIPTDIR/.lein .lein
+ln -s $SCRIPTDIR/.zpretzo .zpretzo
