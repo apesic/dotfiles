@@ -7,7 +7,6 @@ source ~/.liftoff_profile
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PYTHONPATH="$REPOS/liftoff/exp/python/liftoff:$PYTHONPATH"
 export PYTHONPATH="$REPOS/liftoff/workbench/python/liftoff:$PYTHONPATH"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PGDATA="/usr/local/var/postgres"

@@ -1,6 +1,6 @@
 alias g='git'
 alias gs="git status"
-alias gpm="git pull --rebase origin master"
+alias gpm="git fetch --all --prune && git rebase origin/master"
 alias glog="git --no-pager log --graph --all --oneline --color --decorate=short"
 alias gl="glog | head -15"
 
