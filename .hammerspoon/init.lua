@@ -30,7 +30,7 @@ hs.alert.show("Config loaded")
 hs.hotkey.bind(mash_app, 'C', function() hs.application.launchOrFocus('Google Chrome') end)
 hs.hotkey.bind(mash_app, 'T', function() hs.application.launchOrFocus('/Applications/iTerm.app') end)
 hs.hotkey.bind(mash_app, 'V', function() hs.application.launchOrFocus('MacVim') end)
-hs.hotkey.bind(mash_app, 'E', function() hs.application.launchOrFocus('Emacs') end)
+hs.hotkey.bind(mash_app, 'E', function() hs.application.launchOrFocus('/usr/local/Cellar/emacs-plus/25.2/Emacs.app') end)
 hs.hotkey.bind(mash_app, 'K', function() hs.application.launchOrFocus('Slack') end)
 hs.hotkey.bind(mash_app, 'S', function() hs.application.launchOrFocus('Spotify') end)
 
@@ -130,19 +130,18 @@ hs.hotkey.bind(mash, "3", function()
 end)
 
 -- Layouts --
+
 local laptop = "Color LCD"
 
-local centerTB = hs.screen.allScreens()[1]
-local rightTB = hs.screen.allScreens()[3]
-
-local dellUS = "DELL U2515H"
-local asusVertical = "ASUS VH222H"
+local centerScreen = hs.screen{x=0,y=0}
+local rightScreen = hs.screen{x=1,y=0}
+local leftScreen = hs.screen{x=-1,y=0}
 
 local workLayout = {
-  {"Google Chrome", nil, rightTB, hs.layout.maximized, nil, nil},
-  {"MacVim", nil, centerTB, hs.layout.maximized, nil, nil},
-  {"Emacs", nil, centerTB, hs.layout.maximized, nil, nil},
-  {"iTerm", nil, rightTB, hs.layout.maximized, nil, nil},
+  {"Google Chrome", nil, rightScreen, hs.layout.maximized, nil, nil},
+  {"MacVim", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"iTerm2", nil, rightScreen, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
@@ -152,22 +151,21 @@ local laptopLayout = {
   {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
   {"MacVim", nil, laptop, hs.layout.maximized, nil, nil},
   {"Emacs", nil, laptop, hs.layout.maximized, nil, nil},
-  {"iTerm", nil, laptop, hs.layout.maximized, nil, nil},
+  {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
   {"Spotify", nil, laptop, hs.layout.maximized, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.maximized, nil, nil},
 }
 
 local homeLayout = {
-  {"Google Chrome", nil, dellUS, hs.layout.maximized, nil, nil},
-  {"MacVim", nil, dellUS, hs.layout.maximized, nil, nil},
-  {"Emacs", nil, dellUS, hs.layout.maximized, nil, nil},
-  {"iTerm", nil, asusVertical, hs.layout.maximized, nil, nil},
+  {"Google Chrome", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"MacVim", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"iTerm2", nil, leftScreen, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
 }
-
 
 hs.hotkey.bind(mash, "r", function()
   switchLayout()
@@ -177,8 +175,10 @@ end)
 local lastNumberOfScreens = #hs.screen.allScreens()
 
 function switchLayout()
-  numScreens = #hs.screen.allScreens()
-  primaryScreen = hs.screen.allScreens()[1]:name()
+  local numScreens = #hs.screen.allScreens()
+  local primaryScreen = hs.screen.allScreens()[1]:name()
+  local layout = {}
+
   if numScreens == 1 then
     layout = laptopLayout
     layoutName = "Laptop layout"
@@ -195,25 +195,13 @@ end
 
 function onScreensChanged()
   numScreens = #hs.screen.allScreens()
-
   if lastNumberOfScreens ~= numScreens then
     switchLayout()
     lastNumberOfScreens = numScreens
   end
 end
 
-local screenWatcher = hs.screen.watcher.new(onScreensChanged)
-screenWatcher:start()
-
--- Audio
-function muteAudio(uid, eventName, scope, eventEl)
-  if eventName == "jack" then
-    hs.audiodevice.findDeviceByUID(uid):setMuted(true)
-    hs.alert.show("Audio muted")
-  end
-end
-
---hs.audiodevice.watcher.setCallback(muteAudio)
+local screenWatcher = hs.screen.watcher.new(onScreensChanged):start()
 
 ---- GTD task taker
 
@@ -277,6 +265,7 @@ end)
 
 local spotifyBar = hs.menubar.new()
 function setSpotifyTitle()
+  local title = ""
   if hs.spotify.isRunning() then
     if hs.spotify.isPlaying() then
       symbol = "▶ "
@@ -284,12 +273,19 @@ function setSpotifyTitle()
       symbol = "‖ "
     end
     title = symbol .. hs.spotify.getCurrentTrack() .. " – " .. hs.spotify.getCurrentArtist()
-  else
-    title = ""
   end
   spotifyBar:setTitle(title)
 end
 
 -- Using a constantly true doWhile because there's a bug with hs.timer.doEvery that causes it to stop working
 -- after about 50 iterations
-local spotTimer = hs.timer.doWhile(function() return true end, setSpotifyTitle)
+local spotTimer = hs.timer.doWhile(
+  function() return true end,
+  function ()
+    -- There's a bug in Hammerspoon's Spotify API that occasionally causes it to fail and throw an exception
+    local status, err = pcall(setSpotifyTitle)
+    if not status then
+      print("Caught error: " .. err)
+    end
+  end
+)
