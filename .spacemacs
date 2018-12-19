@@ -18,6 +18,8 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     rust
+     php
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -61,6 +63,8 @@ values."
    dotspacemacs-additional-packages '(
      evil-paredit
      evil-easymotion
+     ac-cider
+     browse-at-remote
      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -116,7 +120,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(aurora
+   dotspacemacs-themes '(sanityinc-tomorrow-eighties
                          alect-light
    )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
@@ -310,9 +314,10 @@ you should place your code here."
 
   ; Projectile
   (evil-define-key 'normal (current-global-map) (kbd "C-f") 'helm-projectile)
-  (setq ivy-initial-inputs-alist nil)
-  (setq ivy-re-builders-alist
-        '((t . ivy--regex-fuzzy)))
+  (setq helm-echo-input-in-header-line nil)
+  ;; (setq ivy-initial-inputs-alist nil)
+  ;; (setq ivy-re-builders-alist
+  ;;       '((t . ivy--regex-fuzzy)))
 
   (evil-define-key 'normal (current-global-map) (kbd "TAB") 'evil-jump-item) ; Jump between parenths
   (evil-define-key 'normal (current-global-map) (kbd "SPC ,") 'evil-search-highlight-persist-remove-all)
@@ -345,6 +350,7 @@ you should place your code here."
    ;; js2-mode
    js2-basic-offset 2
    js-indent-level 2
+   js2-strict-trailing-comma-warning nil
    ;; web-mode
    css-indent-offset 2
    web-mode-markup-indent-offset 2
@@ -356,7 +362,7 @@ you should place your code here."
   (setq emmet-move-cursor-after-expanding t)
 
   ; Javascript / Coffeescript
-  (custom-set-variables '(coffee-tab-width 2))
+  ;; (custom-set-variables '(coffee-tab-width 2))
 
   ; Java
   (add-hook 'java-mode-hook (lambda ()
@@ -375,15 +381,35 @@ you should place your code here."
               (define-key inferior-octave-mode-map [down]
                 'comint-next-input)))
 
+  ; Go
+  (setq gofmt-command "goimports")
+  (setq gofmt-args '("-local" "liftoff/"))
+  (add-hook 'before-save-hook 'gofmt-before-save)
 
   ;;; Performance tweaks
   ; Reduce occurence of garbage collection
-  (customize-set-variable 'gc-cons-threshold 20000000)
+  (setq gc-cons-threshold 100000000)
 
   ; Increase limit of lisp variable bindings
-  (custom-set-variables '(max-specpdl-size 2500))
+  ;; (custom-set-variables '(max-specpdl-size 2500))
 
-  )
+  ; CIDER
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  (eval-after-load "auto-complete"
+    '(progn
+       (add-to-list 'ac-modes 'cider-mode)
+       (add-to-list 'ac-modes 'cider-repl-mode)))
+
+  (setq clojure-enable-fancify-symbols t)
+  (setq cider-font-lock-dynamically t)
+  (setq cider-test-show-report-on-success t)
+
+  (require 'helm-bookmark)
+
+  (setq frame-resize-pixelwise t)
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -400,7 +426,7 @@ you should place your code here."
  '(max-specpdl-size 2500)
  '(package-selected-packages
    (quote
-    (evil-cleverparens org alert log4e gntp json-snatcher json-reformat parent-mode haml-mode gitignore-mode fringe-helper git-gutter+ pos-tip flx goto-chg undo-tree diminish web-completion-data dash-functional edn paredit peg eval-sexp-fu seq queue pkg-info epl packed pythonic avy popup wgrep smex ivy-hydra counsel-projectile counsel swiper ivy yapfify uuidgen rake py-isort pug-mode ox-gfm osx-dictionary org-projectile org-download minitest livid-mode skewer-mode simple-httpd live-py-mode link-hint jinja2-mode hide-comnt go-guru git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump company-emacs-eclim column-enforce-mode clojure-snippets request powerline pcre2el markdown-mode js2-mode projectile git-gutter flycheck iedit tern go-mode hydra inflections multiple-cursors cider spinner clojure-mode auto-complete inf-ruby anaconda-mode company highlight anzu smartparens yasnippet helm helm-core magit magit-popup git-commit with-editor async f s dash package-build bind-key bind-map evil eclim alect-themes yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package toc-org tagedit sql-indent spacemacs-theme spaceline smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pbcopy paradox page-break-lines osx-trash orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-paredit evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-easymotion evil-args evil-anzu emmet-mode elisp-slime-nav diff-hl define-word cython-mode company-web company-tern company-statistics company-quickhelp company-go company-anaconda coffee-mode clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aurora-theme ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (browse-at-remote toml-mode racer flycheck-rust cargo rust-mode org-category-capture phpunit phpcbf php-extras php-auto-yasnippets drupal-mode php-mode helm-cider ac-cider evil-cleverparens org alert log4e gntp json-snatcher json-reformat parent-mode haml-mode gitignore-mode fringe-helper git-gutter+ pos-tip flx goto-chg undo-tree diminish web-completion-data dash-functional edn paredit peg eval-sexp-fu seq queue pkg-info epl packed pythonic avy popup wgrep smex ivy-hydra counsel-projectile counsel swiper ivy yapfify uuidgen rake py-isort pug-mode ox-gfm osx-dictionary org-projectile org-download minitest livid-mode skewer-mode simple-httpd live-py-mode link-hint jinja2-mode hide-comnt go-guru git-link eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff dumb-jump company-emacs-eclim column-enforce-mode clojure-snippets request powerline pcre2el markdown-mode js2-mode projectile git-gutter flycheck iedit tern go-mode hydra inflections multiple-cursors cider spinner clojure-mode auto-complete inf-ruby anaconda-mode company highlight anzu smartparens yasnippet helm helm-core magit magit-popup git-commit with-editor async f s dash package-build bind-key bind-map evil eclim alect-themes yaml-mode ws-butler window-numbering which-key web-mode web-beautify volatile-highlights vi-tilde-fringe use-package toc-org tagedit sql-indent spacemacs-theme spaceline smooth-scrolling smeargle slim-mode scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reveal-in-osx-finder restart-emacs rbenv rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pbcopy paradox page-break-lines osx-trash orgit org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets open-junk-file neotree move-text mmm-mode markdown-toc magit-gitflow macrostep lua-mode lorem-ipsum linum-relative leuven-theme less-css-mode launchctl json-mode js2-refactor js-doc jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio go-eldoc gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-paredit evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-easymotion evil-args evil-anzu emmet-mode elisp-slime-nav diff-hl define-word cython-mode company-web company-tern company-statistics company-quickhelp company-go company-anaconda coffee-mode clj-refactor clean-aindent-mode cider-eval-sexp-fu chruby bundler buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aurora-theme ansible-doc ansible aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(vc-annotate-background "#2B3B40")
  '(vc-annotate-color-map
    (quote
