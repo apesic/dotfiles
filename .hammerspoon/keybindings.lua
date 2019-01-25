@@ -2,6 +2,7 @@ local application = require "hs.application"
 local eventtap = require "hs.eventtap"
 local keycodes = require "hs.keycodes"
 local hotkey = require "hs.hotkey"
+local spotify = require "hs.spotify"
 local log = hs.logger.new("init", "debug")
 
 local keyDown = eventtap.event.types.keyDown
@@ -17,9 +18,9 @@ hs.hotkey.bind({}, "f19", function() hs.eventtap.keyStroke({"shift"}, "0") end)
 hs.hotkey.bind({}, "f12", function() hs.eventtap.keyStroke({}, "-") end)
 hs.hotkey.bind({}, "f13", function() hs.eventtap.keyStroke({"shift"}, "-") end)
 
-hs.hotkey.bind({}, "f14", hs.spotify.previous)
-hs.hotkey.bind({}, "f15", hs.spotify.playpause)
-hs.hotkey.bind({}, "f16", hs.spotify.next)
+hs.hotkey.bind({}, "f14", spotify.previous)
+hs.hotkey.bind({}, "f15", spotify.playpause)
+hs.hotkey.bind({}, "f16", spotify.next)
 
 local module = {}
 
