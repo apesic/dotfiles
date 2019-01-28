@@ -47,44 +47,24 @@ set foldmethod=manual
 set foldlevel=99
 
 " Remaps
-let mapleader = ","
+nnoremap <Space> <nop>
+let mapleader="\<Space>"
 nnoremap ; :
-inoremap jj <ESC>
-nnoremap <leader>w <C-w>v<C-w>l
+"inoremap jj <ESC>
+"nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-map <leader>pp :setlocal paste!<cr>
-map <leader>po :setlocal nopaste!<cr>
+"map <leader>pp :setlocal paste!<cr>
+"map <leader>po :setlocal nopaste!<cr>
 nmap > >>
 nmap < <<
 map <Tab> %
-map <leader>z :bp<cr>
-map <leader>x :bn<cr>
+"map <leader>z :bp<cr>
+"map <leader>x :bn<cr>
 map Y y$
 noremap K <Nop>
-
-" Tab switching
-if has("gui_macvim")
-  " Press Ctrl-Tab to switch between open tabs (like browser tabs) to
-  " the right side. Ctrl-Shift-Tab goes the other way.
-  noremap <D-j> :tabnext<CR>
-  noremap <D-k> :tabprev<CR>
-
-  " Switch to specific tab numbers with Command-number
-  noremap <D-1> :tabn 1<CR>
-  noremap <D-2> :tabn 2<CR>
-  noremap <D-3> :tabn 3<CR>
-  noremap <D-4> :tabn 4<CR>
-  noremap <D-5> :tabn 5<CR>
-  noremap <D-6> :tabn 6<CR>
-  noremap <D-7> :tabn 7<CR>
-  noremap <D-8> :tabn 8<CR>
-  noremap <D-9> :tabn 9<CR>
-  " Command-0 goes to the last tab
-  noremap <D-0> :tablast<CR>
-endif
 
 " Better searching
 nnoremap / /\v
@@ -95,7 +75,7 @@ set gdefault
 set incsearch
 set showmatch
 set hlsearch
-nnoremap <leader><space> :noh<cr>
+nnoremap <leader>, :noh<cr>
 
 " Textmate-style invisible char markers
 "set list
@@ -166,12 +146,6 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 set hlsearch
-map <leader>n <plug>NERDTreeTabsToggle<CR>
-
-let g:syntastic_mode_map = { 'passive_filetypes': ['html'] }
-let g:syntastic_java_checkers=['javac']
-let g:syntastic_java_javac_config_file_enabled = 1
-let g:syntastic_java_javac_config_file = '~/src/liftoff/ops/mparticle/liftoff-extension/.syntastic_javac_config'
 
 if &term =~ '^xterm'
     let &t_SI .= "\<Esc>[6 q"
@@ -198,59 +172,39 @@ let g:airline_symbols.space = "\ua0"
 let g:airline_theme = 'hybrid'
 set noshowmode
 
-"Startify
-let g:startify_session_dir = '~/.vim/session'
-
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown "Auto detect markdown filetype
 augroup markdown
     au!
     au BufNewFile,BufRead *.md,*.markdown setlocal filetype=ghmarkdown
 augroup END
 
-nnoremap <silent> <C-Y> :YRShow<cr>
-inoremap <silent> <C-Y> <ESC>:YRShow<cr>
-inoremap <leader>gu :GundoToggle<cr>
-nnoremap <leader>gu :GundoToggle<cr>
-autocmd VimEnter *
-            \   if !argc()
-            \ |   Startify
-            \ |   wincmd w
-            \ | endif
-nmap <silent> <M-d> <Plug>DashSearch
-let g:dash_map = {
-    \ 'clj': 'clj'
-    \ }
-let g:paredit_matchlines=500
-let g:paredit_shortmaps=0
-let g:mustasche_abbreviations = 1
-
 "Expand-region
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+"vmap v <Plug>(expand_region_expand)
+"vmap <C-v> <Plug>(expand_region_shrink)
 
 "" -------------------------------------- EasyMotion Settings -------------------------------------------
 "let g:EasyMotion_do_mapping = 0 " Disable default mappings
-map <Space> <Plug>(easymotion-prefix)
+"map <Space> <Plug>(easymotion-prefix)
 " Bi-directional find motion
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-map <Space>t <Plug>(easymotion-s2)
+"map <Space>t <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
+"let g:EasyMotion_smartcase = 1
 
 " HJKL motions: Line motions
-map <Space>l <Plug>(easymotion-lineanywhere)
-map <Space>j <Plug>(easymotion-j)
-map <Space>k <Plug>(easymotion-k)
-map <Space>h <Plug>(easymotion-linebackward)
-let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+"map <Space>l <Plug>(easymotion-lineanywhere)
+"map <Space>j <Plug>(easymotion-j)
+"map <Space>k <Plug>(easymotion-k)
+"map <Space>h <Plug>(easymotion-linebackward)
+"let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
-map  / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+"map  / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
 
-let g:EasyMotion_use_upper = 1
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+"let g:EasyMotion_use_upper = 1
+"let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
 
 "
 "" ------------------------------------ Language-specific Settings ---------------------------------------

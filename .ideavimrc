@@ -60,6 +60,9 @@ map <leader>" :action :cursive.actions.paredit/wrap-quotes<CR>
 
 " Evaluate sexp like in vim-fireplace
 map cpp :action :cursive.repl.actions/run-top-sexp<CR>
+map cpr :action :cursive.repl.actions/load-file<CR>
+map crt :action :cursive.testing.actions/rerun-last-test<CR>
+map cpt :action :cursive.testing.actions/run-ns-tests<CR>
 
 " Force a single "parinference" when in paredit mode and reformat
 map <leader>rp :action :cursive.actions.paredit/toggle<CR>:action :cursive.actions.paredit/toggle<CR>kj:action :cursive.actions.paredit/toggle<CR>:action ReformatCode<CR>

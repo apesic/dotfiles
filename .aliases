@@ -1,7 +1,7 @@
 alias g='git'
 alias gs="git status"
-alias gpm="git fetch --all --prune && git rebase origin/master"
-alias glog="git --no-pager log --graph --all --oneline --color --decorate=short"
+alias gpm="git fetch --all --prune && git rebase"
+alias glog="git --no-pager log --graph --oneline --color --decorate=short"
 alias gl="glog | head -15"
 
 alias be="bundle exec"
@@ -17,16 +17,19 @@ alias c="fasd_cd -d"
 
 alias l="ls -lah"
 
-alias vim="mvim"
-alias tvim="mvim -v"
+alias vim="nvim"
+alias vi="nvim"
+#alias tvim="mvim -v"
 
 alias postgresstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias postgresstop='pg_ctl -m fast -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 
 alias j="jq '.'"
 
-alias agc='ag --clojure'
-alias agg='ag --go'
+alias rgc='rg -t clojure'
+alias rgg='rg -t go'
+alias rgj='rg -t js -t css -t html -t less'
+alias rgm='rg -t md -C 2'
 
 # Helper functions for ansible
 # Return the first host in a hosts group
@@ -38,3 +41,12 @@ function ah {
 function ash {
   ssh `ah $1`
 }
+
+alias repl='lein repl :start :port 7777'
+
+alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --prune'
+
+function = () {
+  nvimpager $1
+}
+

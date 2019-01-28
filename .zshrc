@@ -60,10 +60,6 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export TERM=xterm-256color
 
-function = () {
-  /usr/share/vim/vim74/macros/less.sh "$*"
-}
-
 function emacs (){
   emacsclient "$@" 2>/dev/null || /usr/bin/emacs "$@"
 }
