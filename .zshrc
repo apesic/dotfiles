@@ -3,6 +3,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+
 COMPLETION_WAITING_DOTS="true"
 
 # Preferred editor for local and remote sessions
