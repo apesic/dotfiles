@@ -31,4 +31,9 @@ ln -s $SCRIPTDIR/.vim .vim
 ln -s $SCRIPTDIR/.iterm2 .iterm2
 ln -s $SCRIPTDIR/.lein .lein
 ln -s $SCRIPTDIR/.zprezto .zprezto
+ln -s $SCRIPTDIR/.zpreztorc .zpreztorc
+ln -s $SCRIPTDIR/.zlogin .zlogin
+ln -s $SCRIPTDIR/.zlogout .zlogout
+ln -s $SCRIPTDIR/.zprofile .zprofile
 ln -s $SCRIPTDIR/.ideavimrc .ideavimrc
+ln -s $SCRIPTDIR/karabiner .config/karabiner
