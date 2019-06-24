@@ -45,8 +45,12 @@ function myLaunchOrFocus(appName)
   end
 end
 
+local windowPicker = require('window-picker')
+hs.hotkey.bind(mashApp, "P", function() windowPicker.windowFuzzySearch() end)
+
 ---- Switch apps
 hs.hotkey.bind(mashApp, 'C', function() myLaunchOrFocus('Google Chrome') end)
+hs.hotkey.bind(mashApp, 'B', function() myLaunchOrFocus('Brave Browser') end)
 hs.hotkey.bind(mashApp, 'T', function() myLaunchOrFocus('iTerm') end)
 hs.hotkey.bind(mashApp, 'V', function() myLaunchOrFocus('MacVim') end)
 hs.hotkey.bind(mashApp, 'E', function() myLaunchOrFocus('IntelliJ IDEA CE') end)
@@ -126,8 +130,8 @@ hs.hotkey.bind(mash, "f", function()
 end)
 
 function moveToScreen(screenPos)
-  window = hs.window.focusedWindow()
-  screen = hs.screen.find({x=screenPos, y=0})
+  local window = hs.window.focusedWindow()
+  local screen = hs.screen.find({x=screenPos, y=0})
   window:moveToScreen(screen)
   window:maximize()
 end
@@ -157,9 +161,9 @@ local workLayout = {
   {"MacVim", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Code", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"IntelliJ IDEA CE", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"iTerm2", nil, rightScreen, hs.layout.maximized, nil, nil},
+  {"com.googlecode.iterm2", nil, rightScreen, nil, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
@@ -170,9 +174,9 @@ local laptopLayout = {
   {"MacVim", nil, laptop, hs.layout.maximized, nil, nil},
   {"Emacs", nil, laptop, hs.layout.maximized, nil, nil},
   {"Code", nil, laptop, hs.layout.maximized, nil, nil},
-  {"IntelliJ IDEA CE", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"iTerm2", nil, laptop, hs.layout.maximized, nil, nil},
+  {"com.googlecode.iterm2", nil, laptop, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
   {"Spotify", nil, laptop, hs.layout.maximized, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.maximized, nil, nil},
@@ -183,9 +187,9 @@ local homeLayout = {
   {"MacVim", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Code", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"IntelliJ IDEA CE", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"iTerm2", nil, rightScreen, hs.layout.maximized, nil, nil},
+  {"com.googlecode.iterm2", nil, rightScreen, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
@@ -204,18 +208,21 @@ local lastNumberOfScreens = #hs.screen.allScreens()
 
 function getCurrentScreens()
   local numScreens = #hs.screen.allScreens()
-  local primaryScreen = hs.screen.allScreens()[1]:name()
-  local screenLayout = {layout = nil, name = ""}
+  local primaryScreen = hs.screen.primaryScreen():name()
+  local screenLayout = {layout = laptopLayout, name = "Laptop layout"}
 
   if numScreens == 1 then
     screenLayout.layout = laptopLayout
     screenLayout.name = "Laptop layout"
-  elseif primaryScreen == "DELL U2715H" or primaryScreen == "DELL U2717D" then
-    screenLayout.layout = workLayout
-    screenLayout.name = "Work layout"
-  elseif primaryScreen == "AG271UG" then
-    screenLayout.layout = homeLayout
-    screenLayout.name = "Home layout"
+    return screenLayout
+  end
+
+  for i, screen in pairs(hs.screen.allScreens()) do
+    if screen:name() == "DELL U2715H" or screen:name() == "DELL U2717D" then
+      screenLayout.layout = workLayout
+      screenLayout.name = "Work layout"
+      return screenLayout
+    end
   end
   return screenLayout
 end
@@ -229,7 +236,7 @@ end
 function onScreensChanged()
   numScreens = #hs.screen.allScreens()
   hs.alert.show("Screens changed")
-  print("Screens changed")
+  print(">>>>>>Screens changed")
   if lastNumberOfScreens ~= numScreens then
     switchLayout()
     lastNumberOfScreens = numScreens
@@ -256,83 +263,66 @@ function fixRotation()
   end
 end
 
----- GTD task taker
-
--- CP'ed from https://github.com/Hammerspoon/hammerspoon/issues/782
-local chooser = nil
-
-local commands = {
-  {
-    ['text'] = 'Add TODO',
-    ['subText'] = 'Prepend to todo.org',
-    ['command'] = 'prepend',
-  },
-}
-
--- This resets the choices to the command table, and has the side effect
--- of resetting the highlighted choice as well.
-local function resetChoices()
-  chooser:rows(#commands)
-  -- add commands
-  local choices = {}
-  for _, command in ipairs(commands) do
-    choices[#choices+1] = command
-  end
-  chooser:choices(choices)
-end
-
-local function prependCallbackFn (exitCode, stdOut, stdErr)
-  if exitCode > 0 then
-    print("Prepend failure", exitCode, stdOut, stdErr)
-  end
-end
-
-local function prepend(text)
-  -- sed -i '1i Text to prepend' file.txt
-  hs.task.new("/usr/local/bin/gsed",
-              prependCallbackFn,
-              {"-i", "2i ** TODO " .. text .. "", os.getenv("HOME") .. "/Dropbox (Personal)/notes/todo.org"}
-  ):start()
-  hs.notify.new({title="Added TODO",informativeText=text}):send()
-end
-
-local function choiceCallback(choice)
-  if choice.command == 'prepend' then
-    prepend(chooser:query())
-  else
-    print("Unknown choice!")
-  end
-  -- set the chooser back to the default state
-  resetChoices()
-  chooser:query('')
-end
-
-hs.hotkey.bind(mashApp, "A", function()
-  chooser = hs.chooser.new(choiceCallback)
-  -- disable built-in search
-  chooser:queryChangedCallback(function() end)
-  -- populate the command list
-  resetChoices()
-  chooser:show()
-end)
-
 local spotifyBar = hs.menubar.new()
+
+function SecondsToClock(seconds)
+  local seconds = tonumber(seconds)
+
+  if seconds <= 0 then
+    return "00:00";
+  else
+    hours = string.format("%02.f", math.floor(seconds/3600));
+    mins = string.format("%02.f", math.floor(seconds/60 - (hours*60)));
+    secs = string.format("%02.f", math.floor(seconds - hours*3600 - mins *60));
+    return mins..":"..secs
+  end
+end
 
 function setSpotifyTitle()
   local title = ""
   local track = ""
+  local position = ""
+  local duration = ""
+  local styledTitle = nil
+  local isPlaying = spotify.isPlaying()
   if spotify.isRunning() then
     track = spotify.getCurrentTrack()
-    if spotify.isPlaying() then
-      symbol = "▶ "
-    else
-      symbol = "‖ "
-    end
     if not (track == nil) then
-      title = symbol .. track .. " – " .. spotify.getCurrentArtist()
+      position = SecondsToClock(spotify.getPosition())
+      duration = SecondsToClock(spotify.getDuration())
+      if isPlaying then
+        symbol = "▶ "
+        symbolColor = { green = 0.5 }
+      else
+        symbol = "■ "
+        symbolColor = { red = 0.3, green = 0.3, blue = 0.3 }
+      end
+      styledSymbol = hs.styledtext.ansi(
+       symbol,
+       {
+         baselineOffset = -2.0,
+         color = symbolColor
+       }
+      )
+      styledPosition = hs.styledtext.ansi(
+        "["..position.."/"..duration.."]",
+        {
+          font = { name = "Hack", size = "8pt" },
+          color = { red = 0.5, green = 0.5, blue = 0.5 },
+          baselineOffset = -2.0
+        }
+      )
+      styledTitle = hs.styledtext.ansi(
+        track.." – "..spotify.getCurrentArtist().." ",
+        {
+          baselineOffset = -2.0
+        }
+      )
+      styledTitle = styledSymbol .. styledTitle .. styledPosition
+
     end
   end
-  spotifyBar:setTitle(title)
+  spotifyBar:setTitle(styledTitle)
 end
 
 spotifyBar:setClickCallback(
@@ -354,6 +344,7 @@ local spotTimer = hs.timer.doWhile(
     if not status then
       print("Caught error: " .. err)
     end
-  end
+  end,
+  5
 )
 
