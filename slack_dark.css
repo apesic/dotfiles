@@ -1,5 +1,5 @@
 /*  Sidebar theme: #333333,#444A47,#D39B46,#FFFFFF,#434745,#FFFFFF,#BBE681,#DB6668 */
-body { background: #2d2b2b; color: #e6e6e6; }
+body { background: #272727; color: #e6e6e6; }
 
 a { color: #ffffff; }
 
@@ -3891,3 +3891,12 @@ ts-jumper .p-jumper__help { display: none; }
 .p-message_pane .c-message_list.c-virtual_list--scrollbar > .c-scrollbar__hider {
   background: inherit;
 }
+
+#client_body:not(.onboarding):not(.feature_global_nav_layout):before {
+  background: inherit;
+}
+
+.p-flexpane_header { background-color: inherit; }
+
+.p-threads_flexpane__header_channel_name { color: inherit; }
+
