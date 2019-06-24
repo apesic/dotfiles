@@ -23,3 +23,6 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export BASE_DIR='/Users/apesic/kafka'
 export KAFKA_DIR="$BASE_DIR/kafka"
 export LEIN_REPL_PORT=7777
+export GRAAL_HOME="/usr/local/graalvm/Contents/Home/"
+#export JAVA_HOME="/usr/local/graalvm/Contents/Home/"
+export PATH="/usr/local/graalvm/Contents/Home/bin:$PATH"

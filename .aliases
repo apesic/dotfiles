@@ -1,8 +1,10 @@
 alias g='git'
 alias gs="git status"
 alias gpm="git fetch --all --prune && git rebase"
+#alias glog="git --no-pager log --graph --pretty=format:'%Cblue%h %Creset%s %Cgreen%d%Creset' --color"
 alias glog="git --no-pager log --graph --oneline --color --decorate=short"
 alias gl="glog | head -15"
+function gsq { git commit -n --fixup :/"$1"; }
 
 alias be="bundle exec"
 alias ..="cd .."
@@ -14,8 +16,6 @@ alias C="wc -l"
 function cdl { cd $1; l;}
 function mcd { mkdir $1; cd $1 }
 alias c="fasd_cd -d"
-
-alias l="ls -lah"
 
 alias vim="nvim"
 alias vi="nvim"
@@ -48,5 +48,12 @@ alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --p
 
 function = () {
   nvimpager $1
+}
+
+# Replacement tools
+alias cat="bat"
+alias help="tldr"
+function l {
+  exa -TaF --level ${1:-1} --group-directories-first --git-ignore
 }
 

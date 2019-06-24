@@ -232,3 +232,12 @@ zle -N zle-keymap-select
 # %(?..) => prompt conditional - %(condition.true.false)
 #
 # ------------------------------------------------------------------------------
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND='rg --files'
+
+function httpl {
+    # `httpless example.org'
+    http --pretty=all --print=hb "$@" | less -R;
+}

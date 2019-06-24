@@ -3,7 +3,8 @@
 	name = Alexei Pesic
 [core]
 	excludesfile = /Users/apesic/.gitignore_global
-	editor = /usr/bin/vim
+	editor = /usr/local/bin/nvim
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [filter "media"]
 	clean = git media clean %f
 	smudge = git media smudge %f
@@ -15,9 +16,9 @@
     autosetuprebase = always
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [alias]
   s = status
@@ -30,7 +31,25 @@
   undo = reset HEAD~1 --mixed
   amend = commit -a --amend
   upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive
-[commit]
-	template = /Users/apesic/.stCommitMsg
+;[commit]
+;	template = /Users/apesic/.stCommitMsg
 [diff]
 	renameLimit = 901
+[commit]
+	template = /Users/apesic/.stCommitMsg
+[rebase]
+	autosquash = true
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	frag = magenta bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+	meta = yellow
