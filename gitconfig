@@ -25,6 +25,7 @@
   undo = reset HEAD~1 --mixed
   amend = commit -a --amend
   upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive
+	cof = !git for-each-ref --format='%(refname:short)' refs/heads | fzf --preview=\"git --no-pager log --oneline --color --decorate=short -n 20 --first-parent {}\" | xargs git checkout
 [diff]
 	renameLimit = 901
 [commit]
