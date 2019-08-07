@@ -3900,3 +3900,31 @@ ts-jumper .p-jumper__help { display: none; }
 
 .p-threads_flexpane__header_channel_name { color: inherit; }
 
+
+.c-search_modal:not(.c-search_modal--primarysearch) .c-search__input_box, .c-search__input_and_close, .c-search_autocomplete {
+  background-color: #444444 !important;
+}
+
+.c-search__input_box  .search__input_box__input {
+  border: none !important;
+  background: inherit !important;
+}
+
+.c-search_autocomplete__suggestion_item {
+  color: #c1c1c1 !important;
+}
+
+.c-search_autocomplete footer {
+  background-color: #232323 !important;
+}
+
+/* Thread footer */
+.p-threads_footer__input--legacy .p-message_input_field, .p-threads_footer__input--legacy .p-message_input_file_button {
+  background-color: #616061 !important;
+}
+
+.p-threads_footer__input .p-message_input_field.focus,
+.p-threads_footer__input .p-message_input_field.focus~.p-message_input_file_button:not(:hover)  {
+  border-color: #c1c1c1 !important;
+  color: #c1c1c1 !important;
+}
