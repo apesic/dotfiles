@@ -234,8 +234,11 @@ zle -N zle-keymap-select
 # ------------------------------------------------------------------------------
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='rg --files'
-export FZF_CTRL_T_COMMAND='rg --files'
+export FZF_DEFAULT_COMMAND='fd -c always'
+export FZF_CTRL_T_COMMAND='fd -c always'
+export FZF_CTRL_T_OPTS="--ansi --preview '(bat -n --color always --wrap character {} 2> /dev/null || cat {} || exa -Ta --level 2 --git --color=always {}) 2> /dev/null | head -200'"
+export FZF_ALT_C_OPTS="--ansi --preview '(exa -Ta --level 2 --git --color=always {}) 2> /dev/null | head -200'"
+export FZF_CTRL_R_OPTS="--preview 'echo {} | bat -n --color always --wrap character -p -l bash' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
 function httpl {
     # `httpless example.org'

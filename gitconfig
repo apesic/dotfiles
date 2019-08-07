@@ -25,7 +25,14 @@
   undo = reset HEAD~1 --mixed
   amend = commit -a --amend
   upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive
-	cof = !git for-each-ref --format='%(refname:short)' refs/heads | fzf --preview=\"git --no-pager log --oneline --color --decorate=short -n 20 --first-parent {}\" | xargs git checkout
+  # fuzzy add using fzf
+	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff --color=always {}' --preview-window=right:50%:wrap | xargs -0 -t -o git add --all"
+  # fuzzy checkout
+	fco = "!git for-each-ref --format='%(refname:short)' refs/heads | fzf --preview=\"git --no-pager log --oneline --color --decorate=short -n 20 --first-parent {}\" | xargs git checkout"
+  # fuzzy rebase
+  fre = "!HASH=`git log --oneline --decorate=short --color | head -n 100 | fzf --ansi --preview='git show --color=always --stat {+1}' | awk '{ print $1 }'` && git rebase -i `echo ${HASH}`"
+  # fuzzy fixup
+  ffix = "!HASH=`git log --oneline --decorate=short --color | head -n 100 | fzf --ansi --preview='git show --color=always --stat {+1}' | awk '{ print $1 }'` && git commit -n --fixup `echo ${HASH}`"
 [diff]
 	renameLimit = 901
 [commit]
