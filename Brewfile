@@ -1,11 +1,13 @@
 tap "argoproj/tap"
 tap "candid82/brew"
+tap "caskroom/cask"
 tap "d12frosted/emacs-plus"
 tap "go-delve/delve"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
 tap "homebrew/services"
+cask "xquartz"
 # Graphical system information display for macOS
 brew "archey"
 # Official Amazon AWS command-line interface
@@ -55,11 +57,13 @@ brew "hugo"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Kubernetes command-line interface
-brew "kubernetes-cli"
+brew "kubernetes-cli", link: false
 # Build tool for Clojure
 brew "leiningen"
 # Asynchronous event library
 brew "libev"
+# Media player based on MPlayer and mplayer2
+brew "mpv"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Network grep
@@ -86,14 +90,16 @@ brew "pngnq"
 brew "postgresql", restart_service: true
 # Monitor data's progress through a pipe
 brew "pv"
-# Interpreted, interactive, object-oriented programming language
-brew "python@2"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
 brew "redis", restart_service: true
+# Fast, efficient and secure backup program
+brew "restic"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# File system client based on SSH File Transfer Protocol
+brew "sshfs"
 # Bring your .bashrc, .vimrc, etc. with you when you SSH
 brew "sshrc"
 # Send macOS User Notifications from the command-line
@@ -102,6 +108,8 @@ brew "terminal-notifier"
 brew "the_silver_searcher"
 # Text interface for Git repositories
 brew "tig"
+# High-performance, platform-neutral implementation of VNC
+brew "tiger-vnc"
 # Simplified and community-driven man pages
 brew "tldr"
 # Display directories as trees (with optional color/HTML output)
@@ -124,5 +132,12 @@ brew "argoproj/tap/argo"
 brew "candid82/brew/joker"
 # GNU Emacs text editor
 brew "d12frosted/emacs-plus/emacs-plus"
+cask "alfred"
+cask "brave-browser"
+cask "dash"
 cask "dozer"
+cask "fork"
+cask "google-chrome"
 cask "minikube"
+cask "notion"
+cask "telegram"
