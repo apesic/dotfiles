@@ -5,6 +5,7 @@ tap "d12frosted/emacs-plus"
 tap "go-delve/delve"
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
 cask "xquartz"
@@ -18,6 +19,10 @@ brew "bat"
 brew "boost"
 # Change macOS display brightness from the command-line
 brew "brightness"
+# Library for manipulating PNG images
+brew "libpng"
+# Cross-platform make
+brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -82,6 +87,8 @@ brew "opam"
 brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
+# CLI for Postgres with auto-completion and syntax highlighting
+brew "pgcli"
 # Optimizer for PNG files
 brew "pngcrush"
 # Tool for optimizing PNG images
@@ -90,6 +97,12 @@ brew "pngnq"
 brew "postgresql", restart_service: true
 # Monitor data's progress through a pipe
 brew "pv"
+# Python version management
+brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@2"
+# State machine compiler
+brew "ragel"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
@@ -138,6 +151,8 @@ cask "dash"
 cask "dozer"
 cask "fork"
 cask "google-chrome"
+cask "font-fira-code"
+cask "font-hack-nerd-font"
 cask "minikube"
 cask "notion"
 cask "telegram"

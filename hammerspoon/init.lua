@@ -13,7 +13,7 @@ function reloadConfig(files)
         hs.reload()
     end
 end
-hs.pathwatcher.new(os.getenv("HOME") .. "/dotfiles/.hammerspoon/", reloadConfig):start()
+hs.pathwatcher.new(os.getenv("HOME") .. "/src/dotfiles/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
 require('caffeine')
@@ -27,7 +27,7 @@ local mash = {"cmd", "alt"}
 local mashShift = {"cmd", "alt", "shift"}
 local mashApp = {"cmd", "ctrl"}
 
-keybindings.newOneTapMetaBinding(keybindings.keys.ctrl, {}, 'escape')
+-- keybindings.newOneTapMetaBinding(keybindings.keys.ctrl, {}, 'escape')
 
 -- Copied from Philc's config
 -- Like hs.application.launchOrFocus, except that it works for apps created using Epichrome.
@@ -52,7 +52,7 @@ hs.hotkey.bind(mashApp, "P", function() windowPicker.windowFuzzySearch() end)
 hs.hotkey.bind(mashApp, 'C', function() myLaunchOrFocus('Google Chrome') end)
 hs.hotkey.bind(mashApp, 'B', function() myLaunchOrFocus('Brave Browser') end)
 hs.hotkey.bind(mashApp, 'T', function() myLaunchOrFocus('iTerm') end)
-hs.hotkey.bind(mashApp, 'V', function() myLaunchOrFocus('MacVim') end)
+hs.hotkey.bind(mashApp, 'V', function() myLaunchOrFocus('Visual Studio Code') end)
 hs.hotkey.bind(mashApp, 'E', function() myLaunchOrFocus('IntelliJ IDEA CE') end)
 hs.hotkey.bind(mashApp, 'K', function() myLaunchOrFocus('Slack') end)
 hs.hotkey.bind(mashApp, 'S', function() myLaunchOrFocus('Spotify') end)
@@ -162,6 +162,7 @@ local workLayout = {
   {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Code", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"Visual Studio Code", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"com.googlecode.iterm2", nil, rightScreen, nil, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
@@ -175,6 +176,7 @@ local laptopLayout = {
   {"Emacs", nil, laptop, hs.layout.maximized, nil, nil},
   {"Code", nil, laptop, hs.layout.maximized, nil, nil},
   {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"Visual Studio Code", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"com.googlecode.iterm2", nil, laptop, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
@@ -188,6 +190,7 @@ local homeLayout = {
   {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Code", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"Visual Studio Code", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"com.googlecode.iterm2", nil, rightScreen, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
