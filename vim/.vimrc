@@ -131,10 +131,10 @@ if &term =~ '^xterm'
 endif
 
 "Ctrl-P
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_user_command = 'ag %s -l --nocolor --files-with-matches --hidden -g "" -p ~/.agignore'
-let g:ctrlp_switch_buffer = 0
-nnoremap <C-f> :CtrlPBuffer<cr>
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
+"let g:ctrlp_user_command = 'ag %s -l --nocolor --files-with-matches --hidden -g "" -p ~/.agignore'
+"let g:ctrlp_switch_buffer = 0
+"nnoremap <C-f> :CtrlPBuffer<cr>
 
 "Airline
 let g:airline_powerline_fonts = 1
@@ -202,8 +202,5 @@ let g:clojure_fuzzy_indent_patterns .= ",up,down"                             " 
 let g:clojure_fuzzy_indent_patterns .= ",entity"                              " Custom
 let g:clojure_fuzzy_indent_patterns .= ",check"                               " Custom
 
-" Coffeescript
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-let coffee_lint_options = "-f /Users/apesic/.coffeelint.json"
-
 let g:syntastic_javascript_checkers = ['eslint']
+

@@ -4,7 +4,6 @@ alias gpm="git fetch --all --prune && git rebase"
 #alias glog="git --no-pager log --graph --pretty=format:'%Cblue%h %Creset%s %Cgreen%d%Creset' --color"
 alias glog="git --no-pager log --graph --oneline --color --decorate=short"
 alias gl="glog | head -15"
-function gsq { git commit -n --fixup :/"$1"; }
 
 alias be="bundle exec"
 alias ..="cd .."
@@ -46,14 +45,9 @@ alias repl='lein repl :start :port 7777'
 
 alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --prune'
 
-function = () {
-  nvimpager $1
-}
-
 # Replacement tools
 alias cat="bat"
 alias help="tldr"
-function l {
-  exa -TaF --level ${1:-1} --group-directories-first --git-ignore
-}
 
+alias ls="/usr/local/bin/gls --group-directories-first --color=auto"
+alias l="exa -1Fa --group-directories-first"
