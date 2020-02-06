@@ -1,0 +1,12 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-hex-case": "upper",
+    "indentation": "space",
+    "block-no-empty": true,
+    "color-no-invalid-hex": true,
+    "declaration-colon-space-after": "always",
+    "max-empty-lines": 1,
+    "unit-whitelist": ["em", "rem", "%", "s", "px"]
+  }
+}

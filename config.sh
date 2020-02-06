@@ -37,3 +37,4 @@ ln -s $SCRIPTDIR/zlogout .zlogout
 ln -s $SCRIPTDIR/zprofile .zprofile
 ln -s $SCRIPTDIR/ideavimrc .ideavimrc
 ln -s $SCRIPTDIR/karabiner .config/karabiner
+ln -s $SCRIPTDIR/stylelintrc .stylelintrc

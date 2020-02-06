@@ -1,2 +1,4 @@
 vim/tmp/*
 lein/self-installs/
+vim/.netrwhist
+karabiner/automatic_backups/*

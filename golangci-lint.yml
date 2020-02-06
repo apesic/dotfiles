@@ -1,0 +1,6 @@
+run:
+  deadline: 30s
+
+issues:
+  exclude:
+    - 'Error return value of .* is not checked'

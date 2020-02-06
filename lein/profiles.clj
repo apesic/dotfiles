@@ -1,6 +1,7 @@
 {:user {:signing {:gpg-key "27C77EAE"}
         :plugins [[cider/cider-nrepl "0.20.0"]
                   [lein-cloverage "1.0.10-SNAPSHOT"]
+                  [gnl/ghostwheel "0.3.9"]
                   #_[lein-pprint "1.2.0"]
                   [jonase/eastwood "0.3.5"]]
         :middleware [cider-nrepl.plugin/middleware]

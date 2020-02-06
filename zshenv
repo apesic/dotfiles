@@ -3,14 +3,12 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
-alias ls='/usr/local/bin/gls'
+#alias ls='/usr/local/bin/gls'
 source ~/.liftoff_profile
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PYTHONPATH="$REPOS/liftoff/workbench/python/liftoff:$PYTHONPATH"
-#export PYTHONPATH="/usr/local/lib/python2.7/site-packages:$PYTHONPATH"
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PGDATA="/usr/local/var/postgres"
 export NODE_PATH="/usr/local/lib/node_modules"
@@ -26,3 +24,8 @@ export LEIN_REPL_PORT=7777
 export GRAAL_HOME="/usr/local/graalvm/Contents/Home/"
 #export JAVA_HOME="/usr/local/graalvm/Contents/Home/"
 export PATH="/usr/local/graalvm/Contents/Home/bin:$PATH"
+export BAT_THEME="TwoDark"
+export LIFTOFF_VENV_ROOT="$HOME/.venv"
+
+export PYTHONUTILSPATH=$REPOS/liftoff/datascience/python/src
+[[ ":$PYTHONPATH:" != *":${PYTHONUTILSPATH}:"* ]] && PYTHONPATH="${PYTHONUTILSPATH}:${PYTHONPATH}"
