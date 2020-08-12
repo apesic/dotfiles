@@ -50,7 +50,7 @@ hs.hotkey.bind(mashApp, "P", function() windowPicker.windowFuzzySearch() end)
 
 ---- Switch apps
 hs.hotkey.bind(mashApp, 'C', function() myLaunchOrFocus('Google Chrome') end)
-hs.hotkey.bind(mashApp, 'B', function() myLaunchOrFocus('Brave Browser') end)
+hs.hotkey.bind(mashApp, 'B', function() myLaunchOrFocus('Firefox Developer Edition') end)
 hs.hotkey.bind(mashApp, 'T', function() myLaunchOrFocus('iTerm') end)
 hs.hotkey.bind(mashApp, 'V', function() myLaunchOrFocus('Visual Studio Code') end)
 hs.hotkey.bind(mashApp, 'E', function() myLaunchOrFocus('IntelliJ IDEA') end)

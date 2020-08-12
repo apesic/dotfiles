@@ -1,16 +1,22 @@
 tap "argoproj/tap"
+tap "brewsci/bio"
 tap "candid82/brew"
-tap "caskroom/cask"
 tap "d12frosted/emacs-plus"
+tap "github/gh"
 tap "go-delve/delve"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
-cask "xquartz"
 # Graphical system information display for macOS
 brew "archey"
+# GNU compiler collection
+brew "gcc"
+# Library for command-line editing
+brew "readline"
+# General-purpose data compression with high compression ratio
+brew "xz"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -33,6 +39,8 @@ brew "dfu-util"
 brew "diff-so-fancy"
 # Run arbitrary commands when files change
 brew "entr"
+# Image manipulation library
+brew "jpeg"
 # Modern replacement for 'ls'
 brew "exa"
 # CLI tool for quick access to files and directories
@@ -45,6 +53,8 @@ brew "ffmpeg"
 brew "fzf"
 # GNU debugger
 brew "gdb"
+# Toolkit for image loading and pixel buffer manipulation
+brew "gdk-pixbuf"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Powerful, lightweight programming language
@@ -62,13 +72,21 @@ brew "hugo"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
 # Kubernetes command-line interface
-brew "kubernetes-cli", link: false
+brew "kubernetes-cli"
 # Build tool for Clojure
 brew "leiningen"
 # Asynchronous event library
 brew "libev"
-# Media player based on MPlayer and mplayer2
-brew "mpv"
+# Text-based web browser
+brew "lynx"
+# Java-based project management
+brew "maven"
+# Interpreted, interactive, object-oriented programming language
+brew "python@2", link: false
+# Scalable distributed version control system
+brew "mercurial"
+# Run a Kubernetes cluster locally
+brew "minikube"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Network grep
@@ -77,6 +95,8 @@ brew "ngrep"
 brew "nmap"
 # Platform built on V8 to build network applications
 brew "node", link: false
+# Package for scientific computing with Python
+brew "numpy"
 # Tools for one-time password authentication systems
 brew "oath-toolkit"
 # High-level interpreted language for numerical computing
@@ -94,37 +114,41 @@ brew "pngcrush"
 # Tool for optimizing PNG images
 brew "pngnq"
 # Object-relational database system
-brew "postgresql", restart_service: true
+brew "postgresql@11", restart_service: true
 # Monitor data's progress through a pipe
 brew "pv"
 # Python version management
 brew "pyenv"
-# Interpreted, interactive, object-oriented programming language
-brew "python@2"
 # State machine compiler
 brew "ragel"
+# Install various Ruby versions and implementations
+brew "ruby-build"
 # Ruby version manager
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
 brew "redis", restart_service: true
-# Fast, efficient and secure backup program
-brew "restic"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# File system client based on SSH File Transfer Protocol
-brew "sshfs"
+# Readline wrapper: adds readline support to tools that lack it
+brew "rlwrap"
+# Software for mathematics, science, and engineering
+brew "scipy"
 # Bring your .bashrc, .vimrc, etc. with you when you SSH
 brew "sshrc"
+# Open source continuous file synchronization application
+brew "syncthing"
+# User interface to the TELNET protocol
+brew "telnet"
 # Send macOS User Notifications from the command-line
 brew "terminal-notifier"
 # Code-search similar to ack
 brew "the_silver_searcher"
 # Text interface for Git repositories
 brew "tig"
-# High-performance, platform-neutral implementation of VNC
-brew "tiger-vnc"
 # Simplified and community-driven man pages
 brew "tldr"
+# Terminal multiplexer
+brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Extensible IRC client
@@ -135,24 +159,20 @@ brew "wget"
 brew "yarn"
 # Modular BSD reimplementation of NASM
 brew "yasm"
+# General-purpose lossless data-compression library
+brew "zlib"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Get stuff done with container-native workflows for Kubernetes.
-brew "argoproj/tap/argo"
+# Python 2D plotting library
+brew "brewsci/bio/matplotlib"
 # Small Clojure interpreter and linter
 brew "candid82/brew/joker"
-# GNU Emacs text editor
-brew "d12frosted/emacs-plus/emacs-plus"
-cask "alfred"
-cask "brave-browser"
-cask "dash"
+brew "d12frosted/emacs-plus/emacs-plus@27"
+# GitHub CLI
+brew "github/gh/gh"
 cask "dozer"
-cask "fork"
-cask "google-chrome"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
 cask "minikube"
-cask "notion"
-cask "telegram"

@@ -244,3 +244,4 @@ function httpl {
     # `httpless example.org'
     http --pretty=all --print=hb "$@" | less -R;
 }
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"

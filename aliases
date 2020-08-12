@@ -26,7 +26,7 @@ alias postgresstop='pg_ctl -m fast -D /usr/local/var/postgres -l /usr/local/var/
 alias j="jq '.'"
 
 alias rgc='rg -t clojure'
-alias rgg='rg -t go'
+alias rgg='rg -t go -g "!vendor"'
 alias rgj='rg -t js -t css -t html -t less'
 alias rgm='rg -t md -C 2'
 

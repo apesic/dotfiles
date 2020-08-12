@@ -1,5 +1,5 @@
 "source ~/.vimrc
-"
+
 set visualbell
 set noerrorbells
 
@@ -16,6 +16,13 @@ set ideajoin
 set showmode
 set scrolloff=3
 set sidescrolloff=3
+
+" plugins
+set surround
+set easymotion
+set commentary
+set ReplaceWithRegister
+set exchange
 
 " Integrate with system clipboard
 set clipboard=unnamedplus,unnamed
@@ -67,9 +74,6 @@ map cpt :action :cursive.testing.actions/run-ns-tests<CR>
 " Force a single "parinference" when in paredit mode and reformat
 map <leader>rp :action :cursive.actions.paredit/toggle<CR>:action :cursive.actions.paredit/toggle<CR>kj:action :cursive.actions.paredit/toggle<CR>:action ReformatCode<CR>
 
-"nmap <leader>b :action Back<cr>
-"nmap <leader>f :action Forward<cr>
-
 nmap <C-f> :action GotoFile<cr>
 "nmap <leader>c :action GotoClass<cr>
 nmap <leader>ns :action GotoSymbol<cr>
@@ -79,8 +83,8 @@ nmap <leader>g :action QuickJavaDoc<cr>
 nmap gd :action GotoDeclaration<cr>
 
 " Press `f` to activate AceJump
-map f :action AceAction<CR>
-" Press `F` to activate Target Mode
-map F :action AceTargetAction<CR>
-" Press `g` to activate Line Mode
-map <leader>k :action AceLineAction<CR>
+map ' <Plug>(easymotion-prefix)
+map f <Plug>(easymotion-fl)
+map F <Plug>(easymotion-bd-f)
+map K <Plug>(easymotion-bd-jk)
+
