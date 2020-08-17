@@ -23,7 +23,7 @@ set laststatus=2
 set clipboard+=unnamed              " Use system clipboard
 "set go+=a                           " Visual selection automatically copied to clipboard
 set autochdir                       " Autoupdate current dir
-set nobackup        
+set nobackup
 set nowritebackup
 set cmdheight=2
 set updatetime=300
@@ -71,11 +71,19 @@ set hlsearch
 nnoremap <leader>, :noh<cr>
 
 runtime! partials/plugins.vim
-runtime! partials/settings.vim
-runtime! partials/colorscheme.vim
-runtime! partials/statusline.vim
-runtime! partials/autocomplete.vim
-runtime! partials/coc.vim
-runtime! partials/defx.vim
-runtime! partials/abbreviations.vim
 
+set noswapfile
+" Don't back up temp files
+set backupskip=/tmp/*,/private/tmp/*
+
+" Don't save help pages in sessions
+set sessionoptions-=help
+" Don't save hidden buffers -- only save the visible ones.
+set sessionoptions-=buffers
+autocmd BufWritePre * :%s/\s\+$//e
+" Text wrapping
+set colorcolumn=110
+set textwidth=110
+let &wrapmargin= &textwidth
+set formatoptions=croql " Now it shouldn't hard-wrap long lines as you're typing (annoying), but you can gq
+                        " as expected.
