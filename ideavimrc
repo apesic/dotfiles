@@ -23,6 +23,7 @@ set easymotion
 set commentary
 set ReplaceWithRegister
 set exchange
+set highlightedyank
 
 " Integrate with system clipboard
 set clipboard=unnamedplus,unnamed
