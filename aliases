@@ -50,4 +50,4 @@ alias cat="bat"
 alias help="tldr"
 
 alias ls="/usr/local/bin/gls --group-directories-first --color=auto"
-alias l="exa -1Fa --group-directories-first"
+alias l="exa -1Fa --group-directories-first --icons"
