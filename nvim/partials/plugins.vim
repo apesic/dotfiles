@@ -20,8 +20,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'machakann/vim-highlightedyank'
 
-  Plug 'yuttie/comfortable-motion.vim'
-
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
@@ -29,12 +27,15 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'Olical/conjure', { 'tag': 'v2.1.0', 'do': 'bin/compile' }
   Plug 'vimwiki/vimwiki'
   Plug 'bling/vim-airline'
-
+  Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+  Plug 'joshdick/onedark.vim'
+  Plug 'ferrine/md-img-paste.vim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 call plug#end()
 
 
 """""""""""""""""""""""""fzf settings""""""""""""""""""""""""""
-nnoremap <silent><C-f> :Files<CR>
+nnoremap <C-f> :Files<CR>
 nnoremap <silent><Leader>b :Buffers<CR>
 nnoremap <silent><Leader>t :BTags<CR>
 nnoremap <silent><Leader>m :History<CR>
@@ -65,45 +66,34 @@ let g:fzf_colors =
 			\ 'spinner': ['fg', 'Label'],
 			\ 'header':  ['fg', 'Comment'] }
 
-" [Tags] Command to generate tags file
-let g:fzf_tags_command = 'ctags -R'
-
-let $FZF_DEFAULT_OPTS = '--layout=reverse'
-" Floating windows only works for latest nvim version.
-" Use floating window to open the fzf search window
-let g:fzf_layout = { 'window': 'call OpenFloatingWin()' }
-
-function! OpenFloatingWin()
-
-	let height = &lines - 3
-	let width = float2nr(&columns - (&columns * 2 / 10))
-	let col = float2nr((&columns - width) / 2)
-
-	" Set up the attribute of floating window
-	let opts = {
-				\ 'relative': 'editor',
-				\ 'row': height * 0.3,
-				\ 'col': col + 20,
-				\ 'width': width * 2 / 3,
-				\ 'height': height / 2
-				\ }
-
-	let buf = nvim_create_buf(v:false, v:true)
-	let win = nvim_open_win(buf, v:true, opts)
-
-	" Floating window highlight setting
-	call setwinvar(win, '&winhl', 'Normal:Pmenu')
-
-	setlocal
-				\ buftype=nofile
-				\ nobuflisted
-				\ bufhidden=hide
-				\ nonumber
-				\ norelativenumber
-				\ signcolumn=no
-endfunction
-"}}
 
 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/Sync/notes',
+                      \ 'syntax': 'markdown', 'ext': '.md',
+                      \ 'auto_diary_index': 1,
+                      \ 'auto_generate_links': 1,}]
+
+let g:vimwiki_auto_header = 1
+
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PopupShowStatusline = 0
+let g:Lf_PopupPreviewPosition = 'bottom'
+let g:Lf_PopupPosition = [5, 0]
+"let g:Lf_AutoResize = 1
+"let g:Lf_CommandMap = {'<C-N>': ['Down'], '<C-P>': ['Up']}
+let g:Lf_PreviewCode = 1
+let g:Lf_PreviewResult = {
+  \ 'File': 1,
+  \ 'Buffer': 1,
+  \ 'Mru': 0,
+  \ 'Tag': 0,
+  \ 'BufTag': 1,
+  \ 'Function': 1,
+  \ 'Line': 0,
+  \ 'Colorscheme': 0,
+  \ 'Rg': 0,
+  \ 'Gtags': 0
+  \}
+
+let g:mdip_imgdir_absolute = '/Users/apesic/Sync/notes/assets'

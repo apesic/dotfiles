@@ -1,6 +1,6 @@
-"let g:fzf_layout = { 'window': 'call FloatingFZF()' }
+let g:fzf_layout = { 'window': 'call FloatingFZF()' }
 
-nnoremap <silent><C-p> :Files<CR>
+nnoremap <silent><C-f> :Files<CR>
 nnoremap <silent><Leader>b :Buffers<CR>
 nnoremap <silent><Leader>t :BTags<CR>
 nnoremap <silent><Leader>m :History<CR>
@@ -40,3 +40,9 @@ function! FloatingFZF()
   call nvim_win_set_option(win, 'number', v:false)
   call nvim_win_set_option(win, 'relativenumber', v:false)
 endfunction
+
+" [Tags] Command to generate tags file
+let g:fzf_tags_command = 'ctags -R'
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse --ansi'
+

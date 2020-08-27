@@ -25,7 +25,7 @@ set clipboard+=unnamed              " Use system clipboard
 set autochdir                       " Autoupdate current dir
 set nobackup
 set nowritebackup
-set cmdheight=2
+set cmdheight=1
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
@@ -70,7 +70,7 @@ set showmatch
 set hlsearch
 nnoremap <leader>, :noh<cr>
 
-runtime! partials/plugins.vim
+runtime! partials/*.vim
 
 set noswapfile
 " Don't back up temp files
@@ -82,8 +82,10 @@ set sessionoptions-=help
 set sessionoptions-=buffers
 autocmd BufWritePre * :%s/\s\+$//e
 " Text wrapping
-set colorcolumn=110
-set textwidth=110
+set colorcolumn=80
+set textwidth=80
 let &wrapmargin= &textwidth
 set formatoptions=croql " Now it shouldn't hard-wrap long lines as you're typing (annoying), but you can gq
                         " as expected.
+
+colorscheme onedark
