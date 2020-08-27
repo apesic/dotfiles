@@ -37,6 +37,8 @@ brew "curl"
 brew "dfu-util"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
+# More intuitive version of du in rust
+brew "dust"
 # Run arbitrary commands when files change
 brew "entr"
 # Image manipulation library
@@ -47,6 +49,8 @@ brew "exa"
 brew "fasd"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# OpenType text shaping engine
+brew "harfbuzz"
 # Play, record, convert, and stream audio and video
 brew "ffmpeg"
 # Command-line fuzzy finder written in Go
@@ -77,16 +81,18 @@ brew "kubernetes-cli"
 brew "leiningen"
 # Asynchronous event library
 brew "libev"
+# GNOME XML library
+brew "libxml2"
+# XML security library
+brew "libxmlsec1"
 # Text-based web browser
 brew "lynx"
 # Java-based project management
 brew "maven"
-# Interpreted, interactive, object-oriented programming language
-brew "python@2", link: false
 # Scalable distributed version control system
 brew "mercurial"
 # Run a Kubernetes cluster locally
-brew "minikube"
+brew "minikube", link: false
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Network grep
@@ -115,10 +121,14 @@ brew "pngcrush"
 brew "pngnq"
 # Object-relational database system
 brew "postgresql@11", restart_service: true
+# Modern replacement for ps written by Rust
+brew "procs"
 # Monitor data's progress through a pipe
 brew "pv"
 # Python version management
 brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@2", link: false
 # State machine compiler
 brew "ragel"
 # Install various Ruby versions and implementations
@@ -135,8 +145,10 @@ brew "rlwrap"
 brew "scipy"
 # Bring your .bashrc, .vimrc, etc. with you when you SSH
 brew "sshrc"
+# The cross-shell prompt for astronauts
+brew "starship"
 # Open source continuous file synchronization application
-brew "syncthing"
+brew "syncthing", restart_service: true
 # User interface to the TELNET protocol
 brew "telnet"
 # Send macOS User Notifications from the command-line
@@ -175,4 +187,5 @@ brew "github/gh/gh"
 cask "dozer"
 cask "font-fira-code"
 cask "font-hack-nerd-font"
+cask "font-jetbrains-mono"
 cask "minikube"
