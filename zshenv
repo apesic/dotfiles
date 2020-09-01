@@ -5,7 +5,7 @@ fi
 
 #alias ls='/usr/local/bin/gls'
 source ~/.liftoff_profile
-export REPOS="/users/apesic/src"
+export REPOS="/Users/apesic/src"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"

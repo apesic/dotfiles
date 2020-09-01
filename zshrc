@@ -1,7 +1,7 @@
 # Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
+#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+#  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+#fi
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -9,7 +9,7 @@ COMPLETION_WAITING_DOTS="true"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 eval "$(fasd --init zsh-hook zsh-wcomp-install zsh-wcomp posix-alias)"
@@ -39,12 +39,40 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "^B" backward-char
 bindkey "^F" forward-char
+#bindkey "^O" forward-word
+#bindkey "^I" backward-word
 export KEYTIMEOUT=1
 
 unsetopt correct_all
-setopt INC_APPEND_HISTORY  # save history as commands are entered, not when shell exits
-setopt HIST_IGNORE_DUPS    # don't save duplicate commmands in history
-unsetopt HIST_IGNORE_SPACE # do save commands that begin with a space
+
+# History
+setopt INC_APPEND_HISTORY        # save history as commands are entered, not when shell exits
+setopt HIST_IGNORE_DUPS          # don't save duplicate commmands in history
+unsetopt HIST_IGNORE_SPACE       # do save commands that begin with a space
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ':start:elapsed;command' format.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire a duplicate event first when trimming history.
+setopt HIST_IGNORE_ALL_DUPS      # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a previously found event.
+setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing non-existent history.
+HISTFILE="${HISTFILE:-${ZDOTDIR:-$HOME}/.zhistory}"  # The path to the history file.
+HISTSIZE=50000                   # The maximum number of events to save in the internal history.
+SAVEHIST=50000                   # The maximum number of events to save in the history file.
+
+# Directory
+setopt AUTO_CD              # Auto changes to a directory without typing cd.
+setopt AUTO_PUSHD           # Push the old directory onto the stack on cd.
+setopt PUSHD_IGNORE_DUPS    # Do not store duplicates in the stack.
+setopt PUSHD_SILENT         # Do not print the directory stack after pushd or popd.
+setopt PUSHD_TO_HOME        # Push to home directory when no argument is given.
+setopt CDABLE_VARS          # Change directory to a path stored in a variable.
+setopt MULTIOS              # Write to multiple descriptors.
+setopt EXTENDED_GLOB        # Use extended globbing syntax.
+unsetopt CLOBBER            # Do not overwrite existing files with > and >>.
+                            # Use >! and >>! to bypass.
 
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
@@ -72,3 +100,67 @@ export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 # PROMPT
 eval "$(starship init zsh)"
 
+
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk
+#
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+
+zinit light-mode for \
+  wookayin/fzf-fasd \
+  wfxr/forgit \
+  Aloxaf/fzf-tab \
+  aperezdc/zsh-notes
+
+export FORGIT_FZF_DEFAULT_OPTS="--ansi
+--height='80%'
+--bind='alt-k:preview-up,alt-p:preview-up'
+--bind='alt-j:preview-down,alt-n:preview-down'
+--bind='ctrl-r:toggle-all'
+--bind='ctrl-s:toggle-sort'
+--bind='?:toggle-preview'
+--bind='alt-w:toggle-preview-wrap'
+--preview-window='right:60%'
+--reverse
+"
+
+# zsh-notes
+# Ctrl-N: Open the notes selector.
+#bindkey '^N' notes-edit-widget
+#zstyle :notes home '/Users/apesic/Sync/notes/'
+#zstyle :notes:widget picker fzf
+#zstyle :notes:widget:preview enabled yes
+#zstyle :notes:widget:preview command bat
+
+# autosuggestions
+#export ZSH_AUTOSUGGEST_USE_ASYNC=true
+
+# navi - cheatsheets
+source <(echo "$(navi widget zsh)")
+export NAVI_FZF_OVERRIDES="--reverse --height 20"

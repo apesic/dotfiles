@@ -47,6 +47,7 @@ alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --p
 
 # Replacement tools
 alias cat="bat"
+alias tldr="navi --tldr"
 alias help="tldr"
 
 alias ls="/usr/local/bin/gls --group-directories-first --color=auto"
