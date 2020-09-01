@@ -53,3 +53,5 @@
 	new = green bold
 	whitespace = red reverse
 	meta = yellow
+[diff-so-fancy]
+	first-run = false

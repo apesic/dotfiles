@@ -7,24 +7,27 @@ vicmd_symbol = "❮❮"
 [git_status]
 style = "blue"
 staged = "𝌆 "
-ahead = "↿"
-behind = "⇂"
+ahead = "↑"
+behind = "↓"
 stashed = ""
 modified = "＊"
 untracked = ""
-diverged = "⌧"
+diverged = " "
+deleted = "☓"
 conflicted = " CONFLICTS="
 conflicted_count.enabled = true
 conflicted_count.style = "red bold"
-prefix = "｢"
-suffix = "｣ "
+prefix = ""
+suffix = " "
 
 [python]
 scan_for_pyfiles = false
 symbol = " "
+disabled = true
 
 [aws]
 symbol = " "
+disabled = true
 
 [battery]
 full_symbol = " "
@@ -59,6 +62,7 @@ symbol = " "
 
 [java]
 symbol = " "
+disabled = true
 
 [julia]
 symbol = " "
