@@ -100,7 +100,6 @@ export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 # PROMPT
 eval "$(starship init zsh)"
 
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
@@ -136,7 +135,7 @@ zinit light-mode for \
   wookayin/fzf-fasd \
   wfxr/forgit \
   Aloxaf/fzf-tab \
-  aperezdc/zsh-notes
+  apesic/znotes
 
 export FORGIT_FZF_DEFAULT_OPTS="--ansi
 --height='80%'
@@ -150,16 +149,9 @@ export FORGIT_FZF_DEFAULT_OPTS="--ansi
 --reverse
 "
 
-# zsh-notes
-# Ctrl-N: Open the notes selector.
-#bindkey '^N' notes-edit-widget
-#zstyle :notes home '/Users/apesic/Sync/notes/'
-#zstyle :notes:widget picker fzf
-#zstyle :notes:widget:preview enabled yes
-#zstyle :notes:widget:preview command bat
-
-# autosuggestions
-#export ZSH_AUTOSUGGEST_USE_ASYNC=true
+# znotes
+zstyle :notes home '/Users/apesic/Sync/notes'
+bindkey '^N' notes-pick-widget
 
 # navi - cheatsheets
 source <(echo "$(navi widget zsh)")
