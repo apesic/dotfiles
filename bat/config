@@ -1,0 +1,5 @@
+--theme="TwoDark"
+--style="changes,header"
+--italic-text=always
+--pager="less -R -F -X -g -i -w -M"
+

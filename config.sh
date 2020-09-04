@@ -40,3 +40,4 @@ ln -s $SCRIPTDIR/ideavimrc .ideavimrc
 ln -s $SCRIPTDIR/karabiner .config/karabiner
 ln -s $SCRIPTDIR/stylelintrc .stylelintrc
 ln -s $SCRIPTDIR/starship.toml .config/starship.toml
+ln -s $SCRIPTDIR/bat .config/bat

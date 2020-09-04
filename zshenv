@@ -4,8 +4,7 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 #alias ls='/usr/local/bin/gls'
-source ~/.liftoff_profile
-export REPOS="/Users/apesic/src"
+export REPOS="$HOME/src"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"

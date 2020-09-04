@@ -4,7 +4,7 @@
 [core]
 	excludesfile = /Users/apesic/.gitignore_global
 	editor = /usr/local/bin/nvim
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RFXgiwM
 [filter "media"]
 	clean = git media clean %f
 	smudge = git media smudge %f

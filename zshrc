@@ -2,6 +2,11 @@
 #if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 #  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 #fi
+#
+if [[ -s ${HOME}/.liftoff_profile ]]; then
+  source ${HOME}/.liftoff_profile
+fi
+
 
 COMPLETION_WAITING_DOTS="true"
 
@@ -156,3 +161,7 @@ bindkey '^N' notes-pick-widget
 # navi - cheatsheets
 source <(echo "$(navi widget zsh)")
 export NAVI_FZF_OVERRIDES="--reverse --height 20"
+
+# smartcase matching
+zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
+
