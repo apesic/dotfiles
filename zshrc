@@ -204,7 +204,6 @@ prompt_precmd() {
 	unset cmd_timestamp
 }
 
-#terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
 function insert-mode () { echo "%F{8}┗━%f" }
 function normal-mode () { echo "%F{8}┗┿%f" }
 
@@ -215,7 +214,7 @@ function set-prompt () {
     (*)          VI_MODE="$(insert-mode)" ;;
   esac
   PROMPT="$VI_MODE%(?.%F{magenta}.%F{red})❯❯%f " # Display a red prompt char on failure
-  RPROMPT="%F{8}${SSH_TTY:+%n@%m}%f"    # Display username if connected via SSH
+  RPROMPT="%F{8}$(date '+%H:%M:%S %m-%d-%y')%f"
 }
 
 function zle-line-init zle-keymap-select() {
@@ -223,8 +222,6 @@ function zle-line-init zle-keymap-select() {
   zle reset-prompt
 }
 
-#preexec () { print -rn -- $terminfo[el]; }
-#
 # prevent percentage showing up
 # if output doesn't end with a newline
 export PROMPT_EOL_MARK=''
@@ -267,9 +264,6 @@ function httpl {
     http --pretty=all --print=hb "$@" | less -R;
 }
 export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
-
-# PROMPT
-#eval "$(starship init zsh)"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -330,4 +324,3 @@ export NAVI_FZF_OVERRIDES="--reverse --height 20"
 
 # smartcase matching
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
-
