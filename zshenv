@@ -32,3 +32,11 @@ export LIFTOFF_VENV_ROOT="$HOME/.venv"
 export PYTHONUTILSPATH=$REPOS/liftoff/datascience/python/src
 [[ ":$PYTHONPATH:" != *":${PYTHONUTILSPATH}:"* ]] && PYTHONPATH="${PYTHONUTILSPATH}:${PYTHONPATH}"
 
+
+if [[ -s ${HOME}/.localenv ]]; then
+  source ${HOME}/.localenv
+fi
+
+if [[ -s ${HOME}/.liftoff_profile ]]; then
+  source ${HOME}/.liftoff_profile
+fi
