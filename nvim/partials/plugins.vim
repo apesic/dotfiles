@@ -69,12 +69,16 @@ let g:fzf_colors =
 
 
 
-let g:vimwiki_list = [{'path': '~/Sync/notes',
-                      \ 'syntax': 'markdown', 'ext': '.md',
-                      \ 'auto_diary_index': 1,
-                      \ 'auto_generate_links': 1,}]
+let g:vimwiki_list = [{
+  \ 'path': '~/Sync/notes',
+  \ 'syntax': 'markdown', 'ext': '.md',
+  \ 'automatic_nested_syntaxes': 1,
+  \ 'auto_diary_index': 1,
+  \ 'auto_generate_links': 1,
+ \}]
 
 let g:vimwiki_auto_header = 1
+let g:vimwiki_global_ext = 0
 
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1

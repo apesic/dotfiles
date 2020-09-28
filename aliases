@@ -4,6 +4,9 @@ alias gpm="git fetch --all --prune && git rebase"
 #alias glog="git --no-pager log --graph --pretty=format:'%Cblue%h %Creset%s %Cgreen%d%Creset' --color"
 alias glog="git --no-pager log --graph --oneline --color --decorate=short"
 alias gl="glog | head -15"
+alias gpf="git push -f" alias grc="git rebase --continue"
+alias grs="git rebase --skip"
+alias gco="git checkout"
 
 alias be="bundle exec"
 alias ..="cd .."
@@ -52,3 +55,6 @@ alias help="tldr"
 
 alias ls="/usr/local/bin/gls --group-directories-first --color=auto"
 alias l="exa -1Fa --group-directories-first --icons"
+alias ll="exa -lah --git  --group-directories-first --icons"
+
+alias vw="nvim -c VimwikiIndex"

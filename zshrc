@@ -302,6 +302,8 @@ zinit light-mode for \
   Aloxaf/fzf-tab \
   apesic/znotes
 
+zinit snippet OMZP::git-auto-fetch
+
 export FORGIT_FZF_DEFAULT_OPTS="--ansi
 --height='80%'
 --bind='alt-k:preview-up,alt-p:preview-up'
