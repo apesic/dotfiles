@@ -1,9 +1,3 @@
-# Source Prezto.
-#if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-#  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-#fi
-#
-
 COMPLETION_WAITING_DOTS="true"
 
 # Preferred editor for local and remote sessions
@@ -105,12 +99,25 @@ autoload -Uz vcs_info
 
 # Set vcs_info parameters
 #
-zstyle ':vcs_info:*' enable hg bzr git
+# List of vcs_info format strings:
+#
+# %b => current branch
+# %a => current action (rebase/merge)
+# %s => current version control system
+# %r => name of the root directory of the repository
+# %S => current path relative to the repository root directory
+# %m => in case of Git, show information about stashes
+# %u => show unstaged changes in the repository
+# %c => show staged changes in the repository
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' get-revision true
 zstyle ':vcs_info:*:*' unstagedstr '!'
-zstyle ':vcs_info:*:*' stagedstr '+'
-zstyle ':vcs_info:*:*' formats "$FX[bold]%r$FX[no-bold]/%S" "%s/%b" "%%u%c"
-zstyle ':vcs_info:*:*' actionformats "$FX[bold]%r$FX[no-bold]/%S" "%s/%b" "%u%c (%a)"
+zstyle ':vcs_info:*:*' stagedstr '𝌆'
 zstyle ':vcs_info:*:*' nvcsformats "%~" "" ""
+zstyle ':vcs_info:git*' formats ' %F{8}%b %F{blue}%%u%c%f'
+zstyle ':vcs_info:git*' actionformats ' %F{8}%b %F{blue}%%u%c%f |%F{yellow}%a%f'
+FORCE_RUN_VCS_INFO=1
 
 # Fastest possible way to check if repo is dirty
 #
@@ -122,9 +129,8 @@ git_dirty() {
 }
 
 # Display information about the current repository
-#
 repo_information() {
-    echo "%F{blue}${vcs_info_msg_0_%%/.} %F{8}$vcs_info_msg_1_`git_dirty` $vcs_info_msg_2_%f"
+    echo "${vcs_info_msg_0_} %F{yellow}`git_dirty`%f"
 }
 
 # Displays the exec time of the last command if set threshold was exceeded
@@ -171,9 +177,7 @@ prompt_string_length() {
 
 prompt_precmd() {
   vcs_info # Get version control info before we start outputting stuff
-  #print -P "\n%F{8}┏━ %f$(repo_information) %F{yellow}$(cmd_exec_time)%f"
-
-	local preprompt="\n%F{8}┏━ %f%F{blue}%~%F{242}$vcs_info_msg_0_`git_dirty` %f %F{yellow}`cmd_exec_time`%f"
+    local preprompt="\n%F{8}┏━ %f%F{blue}%~%F{242}%F{242}`repo_information` %F{yellow}`cmd_exec_time`%f"
 	print -P $preprompt
 
 	# check async if there is anything to pull
@@ -184,10 +188,15 @@ prompt_precmd() {
 		command git fetch &>/dev/null &&
 		# check if there is an upstream configured for this branch
 		command git rev-parse --abbrev-ref @'{u}' &>/dev/null && {
-			local arrows=''
-			(( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows='↓'
-			(( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+='↑'
-			print -Pn "\e7\e[A\e[1G\e[`prompt_string_length $preprompt`C%F{cyan}${arrows}%f\e8"
+			local gs=''
+			local ahead behind
+			ahead=$(git rev-list --right-only --count HEAD...@'{u}')
+			behind=$(git rev-list --left-only --count HEAD...@'{u}')
+			(( $ahead > 0 )) && gs='↓'
+			(( $ahead > 1 )) && gs+='%F{8}${ahead}%f'
+			(( $behind > 0 )) && gs+='↑'
+			(( $behind > 1 )) && gs+='%F{8}${behind}%f'
+			print -Pn "\e7\e[A\e[1G\e[`prompt_string_length $preprompt`C%F{cyan}${gs}%f\e8"
 		}
 	} &!
 
@@ -224,29 +233,15 @@ prompt_opts=(cr subst percent)
 
 zmodload zsh/datetime
 autoload -Uz add-zsh-hook
-autoload -Uz vcs_info
 
 add-zsh-hook precmd prompt_precmd
 add-zsh-hook preexec prompt_preexec
 
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats ' %b'
-zstyle ':vcs_info:git*' actionformats ' %b|%a'
 zle -N zle-line-init
 zle -N zle-keymap-select
 
 # ------------------------------------------------------------------------------
 #
-# List of vcs_info format strings:
-#
-# %b => current branch
-# %a => current action (rebase/merge)
-# %s => current version control system
-# %r => name of the root directory of the repository
-# %S => current path relative to the repository root directory
-# %m => in case of Git, show information about stashes
-# %u => show unstaged changes in the repository
-# %c => show staged changes in the repository
 #
 # List of prompt format strings:
 #
