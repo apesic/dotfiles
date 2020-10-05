@@ -7,7 +7,7 @@ else
   export EDITOR='nvim'
 fi
 
-eval "$(fasd --init zsh-hook zsh-wcomp-install zsh-wcomp posix-alias)"
+eval "$(zoxide init zsh)"
 
 source ~/.aliases
 

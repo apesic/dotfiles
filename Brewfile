@@ -1,22 +1,17 @@
 tap "argoproj/tap"
-tap "brewsci/bio"
 tap "candid82/brew"
+tap "caskroom/cask"
 tap "d12frosted/emacs-plus"
-tap "github/gh"
 tap "go-delve/delve"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "moncho/dry"
+cask "xquartz"
 # Graphical system information display for macOS
 brew "archey"
-# GNU compiler collection
-brew "gcc"
-# Library for command-line editing
-brew "readline"
-# General-purpose data compression with high compression ratio
-brew "xz"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Clone of cat(1) with syntax highlighting and Git integration
@@ -25,10 +20,6 @@ brew "bat"
 brew "boost"
 # Change macOS display brightness from the command-line
 brew "brightness"
-# Library for manipulating PNG images
-brew "libpng"
-# Cross-platform make
-brew "cmake"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -41,14 +32,16 @@ brew "diff-so-fancy"
 brew "dust"
 # Run arbitrary commands when files change
 brew "entr"
-# Image manipulation library
-brew "jpeg"
 # Modern replacement for 'ls'
 brew "exa"
 # CLI tool for quick access to files and directories
 brew "fasd"
+# Easiest way to build and release mobile apps
+brew "fastlane"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
+# Create and manage Android app repositories for F-Droid
+brew "fdroidserver"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Play, record, convert, and stream audio and video
@@ -57,12 +50,16 @@ brew "ffmpeg"
 brew "fzf"
 # GNU debugger
 brew "gdb"
-# Toolkit for image loading and pixel buffer manipulation
-brew "gdk-pixbuf"
+# GitHub command-line tool
+brew "gh"
+# GIF image/animation creator/editor
+brew "gifsicle"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
 # Powerful, lightweight programming language
 brew "lua"
+# Command-driven, interactive function plotting
+brew "gnuplot"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
 # Improved top (interactive process viewer)
@@ -73,14 +70,16 @@ brew "httpie"
 brew "httrack"
 # Configurable static site generator
 brew "hugo"
+# Tools and libraries to manipulate images in many formats
+brew "imagemagick"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
-# Kubernetes command-line interface
-brew "kubernetes-cli"
 # Build tool for Clojure
 brew "leiningen"
 # Asynchronous event library
 brew "libev"
+# Library to render SVG files using Cairo
+brew "librsvg"
 # GNOME XML library
 brew "libxml2"
 # XML security library
@@ -91,8 +90,10 @@ brew "lynx"
 brew "maven"
 # Scalable distributed version control system
 brew "mercurial"
-# Run a Kubernetes cluster locally
-brew "minikube", link: false
+# Media player based on MPlayer and mplayer2
+brew "mpv"
+# Interactive cheatsheet tool for the command-line
+brew "navi"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
 # Network grep
@@ -100,25 +101,23 @@ brew "ngrep"
 # Port scanning utility for large networks
 brew "nmap"
 # Platform built on V8 to build network applications
-brew "node", link: false
-# Package for scientific computing with Python
-brew "numpy"
+brew "node"
 # Tools for one-time password authentication systems
 brew "oath-toolkit"
 # High-level interpreted language for numerical computing
 brew "octave"
-# The OCaml package manager
+# OCaml package manager
 brew "opam"
 # Swiss-army knife of markup format conversion
 brew "pandoc"
 # Shell command parallelization utility
 brew "parallel"
-# CLI for Postgres with auto-completion and syntax highlighting
-brew "pgcli"
 # Optimizer for PNG files
 brew "pngcrush"
 # Tool for optimizing PNG images
 brew "pngnq"
+# Object-relational database system
+brew "postgresql", restart_service: true
 # Object-relational database system
 brew "postgresql@11", restart_service: true
 # Modern replacement for ps written by Rust
@@ -129,6 +128,8 @@ brew "pv"
 brew "pyenv"
 # Interpreted, interactive, object-oriented programming language
 brew "python@2", link: false
+# QR Code generation
+brew "qrencode"
 # State machine compiler
 brew "ragel"
 # Install various Ruby versions and implementations
@@ -137,18 +138,22 @@ brew "ruby-build"
 brew "rbenv"
 # Persistent key-value database, with built-in net interface
 brew "redis", restart_service: true
+# Fast, efficient and secure backup program
+brew "restic"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Readline wrapper: adds readline support to tools that lack it
 brew "rlwrap"
-# Software for mathematics, science, and engineering
-brew "scipy"
+# File system client based on SSH File Transfer Protocol
+brew "sshfs"
 # Bring your .bashrc, .vimrc, etc. with you when you SSH
 brew "sshrc"
-# The cross-shell prompt for astronauts
+# Cross-shell prompt for astronauts
 brew "starship"
 # Open source continuous file synchronization application
 brew "syncthing", restart_service: true
+# Very fast implementation of tldr in Rust
+brew "tealdeer"
 # User interface to the TELNET protocol
 brew "telnet"
 # Send macOS User Notifications from the command-line
@@ -157,35 +162,46 @@ brew "terminal-notifier"
 brew "the_silver_searcher"
 # Text interface for Git repositories
 brew "tig"
-# Simplified and community-driven man pages
-brew "tldr"
-# Terminal multiplexer
-brew "tmux"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
 # Extensible IRC client
 brew "weechat"
 # Internet file retriever
 brew "wget"
+# Tools for the WireGuard secure network tunnel
+brew "wireguard-tools"
 # JavaScript package manager
 brew "yarn"
 # Modular BSD reimplementation of NASM
 brew "yasm"
-# General-purpose lossless data-compression library
-brew "zlib"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # UNIX shell (command interpreter)
 brew "zsh"
 # Additional completion definitions for zsh
 brew "zsh-completions"
-# Python 2D plotting library
-brew "brewsci/bio/matplotlib"
 # Small Clojure interpreter and linter
 brew "candid82/brew/joker"
-brew "d12frosted/emacs-plus/emacs-plus@27"
-# GitHub CLI
-brew "github/gh/gh"
+brew "d12frosted/emacs-plus/emacs-plus@27", link: false
+# a Docker manager for the terminal
+brew "moncho/dry/dry"
+cask "alfred"
+cask "brave-browser"
+cask "dash"
 cask "dozer"
 cask "font-fira-code"
+cask "font-hack"
 cask "font-hack-nerd-font"
 cask "font-jetbrains-mono"
+cask "fork"
+cask "godot"
+cask "google-chrome"
+cask "iterm2"
+cask "karabiner-elements"
 cask "minikube"
+cask "notion"
+cask "openscad"
+cask "telegram"
+cask "tunnelblick"
+cask "visual-studio-code"
+cask "vnote"
