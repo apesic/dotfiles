@@ -75,6 +75,8 @@ let g:vimwiki_list = [{
   \ 'automatic_nested_syntaxes': 1,
   \ 'auto_diary_index': 1,
   \ 'auto_generate_links': 1,
+  \ 'auto_tags': 1,
+  \ 'auto_generate_tags': 1,
  \}]
 
 let g:vimwiki_auto_header = 1
