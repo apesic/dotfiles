@@ -7,6 +7,9 @@
     "color-no-invalid-hex": true,
     "declaration-colon-space-after": "always",
     "max-empty-lines": 1,
-    "unit-whitelist": ["em", "rem", "%", "s", "px"]
+    "unit-whitelist": ["em", "rem", "%", "s", "px"],
+    "selector-list-comma-newline-after": false,
+    "rule-empty-line-before": false,
+    "comment-empty-line-before": false,
   }
 }
