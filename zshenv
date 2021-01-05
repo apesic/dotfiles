@@ -11,7 +11,6 @@ export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$REPOS/flutter/bin:$PATH"
 export PYTHONPATH="$REPOS/liftoff/workbench/python/liftoff:$PYTHONPATH"
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 export PGDATA="/usr/local/var/postgres"
 export NODE_PATH="/usr/local/lib/node_modules"
 PERL_MB_OPT="--install_base \"/Users/apesic/perl5\""; export PERL_MB_OPT;

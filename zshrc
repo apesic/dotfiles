@@ -326,3 +326,6 @@ export NAVI_FZF_OVERRIDES="--reverse --height 20"
 
 # smartcase matching
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
+
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
