@@ -26,7 +26,7 @@ set exchange
 set highlightedyank
 
 " Integrate with system clipboard
-set clipboard=unnamedplus,unnamed
+set clipboard=ideaput,unnamedplus,unnamed
 
 " Better searching
 set ignorecase
@@ -82,10 +82,14 @@ nmap <leader>nm :action FileStructurePopup<cr>
 nmap gh :action ShowErrorDescription<cr>
 nmap <leader>g :action QuickJavaDoc<cr>
 nmap gd :action GotoDeclaration<cr>
+nmap gi :action GotoImplementation<cr>
 
 " Press `f` to activate AceJump
 map ' <Plug>(easymotion-prefix)
-map f <Plug>(easymotion-fl)
+"map f <Plug>(easymotion-fl)
 map F <Plug>(easymotion-bd-f)
 map K <Plug>(easymotion-bd-jk)
 
+map <leader>rr :action RenameElement<CR>
+map <leader>rt :action Refactorings.QuickListPopupAction<CR>
+map <leader>ri :action ShowIntentionActions<CR>
