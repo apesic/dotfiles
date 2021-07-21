@@ -46,15 +46,19 @@ function ash {
 
 alias repl='lein repl :start :port 7777'
 
-alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --prune'
+#alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --prune'
+alias t='exa -TFa -L 2 --group-directories-first --icons --git-ignore --color=always | bat -p'
+alias tt='exa -TFa --color=always --group-directories-first --icons --git-ignore | bat -p'
 
 # Replacement tools
 alias cat="bat"
 alias tldr="navi --tldr"
 alias help="tldr"
 
-alias ls="/usr/local/bin/gls --group-directories-first --color=auto"
+alias ls="exa --group-directories-first --icons"
 alias l="exa -1Fa --group-directories-first --icons"
 alias ll="exa -lah --git  --group-directories-first --icons"
 
 alias vw="nvim -c VimwikiIndex"
+alias vt="nvim -c VimwikiMakeDiaryNote"
+alias vd="nvim -c VimwikiDiaryIndex"

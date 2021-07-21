@@ -192,7 +192,7 @@ local homeLayout = {
   {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Visual Studio Code", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"com.googlecode.iterm2", nil, rightScreen, hs.layout.maximized, nil, nil},
+  {"com.googlecode.iterm2", nil, leftScreen, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
   {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
@@ -221,6 +221,11 @@ function getCurrentScreens()
   end
 
   for i, screen in pairs(hs.screen.allScreens()) do
+    if screen:name() == "DELL U2515H" then
+      screenLayout.layout = homeLayout
+      screenLayout.name = "Home layout"
+      return screenLayout
+    end
     if screen:name() == "DELL U2715H" or screen:name() == "DELL U2717D" then
       screenLayout.layout = workLayout
       screenLayout.name = "Work layout"

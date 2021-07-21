@@ -1,4 +1,4 @@
-{:user {:signing {:gpg-key "27C77EAE"}
+{:user {:signing {:gpg-key "4BD99FEA5CC9DEDF9A35CA9A1BC7FF25FE9EF247"}
         :plugins [[cider/cider-nrepl "0.20.0"]
                   [lein-cloverage "1.0.10-SNAPSHOT"]
                   [gnl/ghostwheel "0.3.9"]

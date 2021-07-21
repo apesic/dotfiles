@@ -25,6 +25,7 @@ set ReplaceWithRegister
 set exchange
 set highlightedyank
 set argtextobj
+set NERDTree
 
 " Integrate with system clipboard
 set clipboard=ideaput,unnamedplus,unnamed
