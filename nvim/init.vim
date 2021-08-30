@@ -1,6 +1,9 @@
 "set runtimepath^=~/.vim runtimepath+=~/.vim/after
 "let &packpath = &runtimepath
 "source ~/.vim/.vimrc
+"
+let g:python3_host_prog = '/Users/apesic/.pyenv/versions/3.7.9/bin/python3'
+let g:python_host_prog = '/Users/apesic/.pyenv/versions/2.7.18/bin/python'
 
 set background=dark
 set hidden

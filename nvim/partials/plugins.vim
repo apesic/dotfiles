@@ -71,16 +71,28 @@ let g:fzf_colors =
 
 let g:vimwiki_list = [{
   \ 'path': '~/Sync/notes',
+  \ 'path_html': '~/Sync/notes/site_html',
+	\ 'custom_wiki2html': 'vimwiki_markdown',
+  \ 'template_path': '~/Sync/notes/templates/',
+  \ 'template_default': 'default',
+  \ 'template_ext': '.tpl',
   \ 'syntax': 'markdown', 'ext': '.md',
   \ 'automatic_nested_syntaxes': 1,
   \ 'auto_diary_index': 1,
   \ 'auto_generate_links': 1,
   \ 'auto_tags': 1,
   \ 'auto_generate_tags': 1,
+  \ 'auto_toc': 1,
+  \ 'auto_export': 1,
+  \ 'links_space_car': '-',
+  \ 'diary_caption_level': 1,
+  \ 'list_margin': 0,
  \}]
 
 let g:vimwiki_auto_header = 1
+let g:vimwiki_h1_headers = 1
 let g:vimwiki_global_ext = 0
+let g:vimwiki_auto_chdir = 1
 
 let g:Lf_WindowPosition = 'popup'
 let g:Lf_PreviewInPopup = 1
@@ -103,4 +115,8 @@ let g:Lf_PreviewResult = {
   \ 'Gtags': 0
   \}
 
+autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+" there are some defaults for image directory and image name, you can change them
+" let g:mdip_imgdir = 'img'
+" let g:mdip_imgname = 'image'
 let g:mdip_imgdir_absolute = '/Users/apesic/Sync/notes/assets'

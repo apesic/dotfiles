@@ -28,6 +28,9 @@ export PATH="/usr/local/graalvm/Contents/Home/bin:$PATH"
 export BAT_THEME="TwoDark"
 export LIFTOFF_VENV_ROOT="$HOME/.venv"
 
+export VIMWIKI_ROOT_PATH="$HOME/Sync/notes/"
+export VIMWIKI_MARKDOWN_EXTENSIONS=nl2br,tables,codehilite,sane_lists,pymdownx.tasklist,pymdownx.b64,pymdownx.magiclink,pymdownx.superfences
+
 export PYTHONUTILSPATH=$REPOS/liftoff/datascience/python/src
 [[ ":$PYTHONPATH:" != *":${PYTHONUTILSPATH}:"* ]] && PYTHONPATH="${PYTHONUTILSPATH}:${PYTHONPATH}"
 
