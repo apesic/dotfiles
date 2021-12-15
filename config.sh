@@ -26,3 +26,4 @@ ln -s $SCRIPTDIR/karabiner .config/karabiner
 ln -s $SCRIPTDIR/stylelintrc .stylelintrc
 ln -s $SCRIPTDIR/starship.toml .config/starship.toml
 ln -s $SCRIPTDIR/bat .config/bat
+ln -s $SCRIPTDIR/kitty.conf .config/kitty/kitty.conf
