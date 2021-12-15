@@ -29,6 +29,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'bling/vim-airline'
   Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
   Plug 'joshdick/onedark.vim'
+  Plug 'saltdotac/citylights.vim'
   Plug 'ferrine/md-img-paste.vim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
   Plug 'tpope/vim-commentary'
