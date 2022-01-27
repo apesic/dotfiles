@@ -6,7 +6,6 @@ fi
 
 #alias ls='/usr/local/bin/gls'
 export REPOS="$HOME/src"
-#export PYENV_ROOT="$HOME/.pyenv"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$REPOS/flutter/bin:$PATH"
@@ -35,6 +34,4 @@ export VIMWIKI_MARKDOWN_EXTENSIONS=nl2br,tables,codehilite,sane_lists,pymdownx.t
 if [[ -s ${HOME}/.localenv ]]; then
   source ${HOME}/.localenv
 fi
-
-#export PATH="$PYENV_ROOT/bin:$PATH"
 

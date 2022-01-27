@@ -33,17 +33,6 @@ alias rgg='rg -t go -g "!vendor"'
 alias rgj='rg -t js -t css -t html -t less'
 alias rgm='rg -t md -C 2'
 
-# Helper functions for ansible
-# Return the first host in a hosts group
-function ah {
-  psh -l "=$1" | head -n 1
-}
-
-# SSH to the first host listed in a host group
-function ash {
-  ssh `ah $1`
-}
-
 alias repl='lein repl :start :port 7777'
 
 #alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --prune'
