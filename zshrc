@@ -81,11 +81,12 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export TERM=xterm-256color
+export TERMINFO=/usr/share/terminfo
+#export TERM=xterm-256color
 
-function emacs (){
-  emacsclient "$@" 2>/dev/null || /usr/bin/emacs "$@"
-}
+#function emacs (){
+#  emacsclient "$@" 2>/dev/null || /usr/bin/emacs "$@"
+#}
 
 # PROMPT
 #
@@ -157,15 +158,52 @@ cmd_exec_time() {
 	(($elapsed > ${PURE_CMD_MAX_EXEC_TIME:=5})) && prompt_human_time $elapsed
 }
 
+function title() {
+  # escape '%' chars in $1, make nonprintables visible
+  local cmd=${(V)1//\%/\%\%}
+
+  # See "Conditional Substrings in Prompts"
+  # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+  # %X>...>                     : truncate to 40 chars followed by ...
+  # %X(c:true-text:false-text)  : if c > %X show true text, else false text
+
+  # Truncate cmd to 40
+  cmd=$(print -Pn "%40>...>$cmd" | tr -d "\n")
+
+  case $TERM in
+    screen|screen-bce|screen-256color|screen-256color-bce)
+      if [[ -z $SSH_TTY ]]; then
+        #print -Pn "\ek%40<...<%~> $cmd\e\\"
+        # if c (current path with prefix replace, aka ~) is larger than 7,
+        # show first 3 parts, then ... and then last 3 parts, else just %~
+        print -Pn "\ek%7(c:%-3~/.../%3~:%~) $cmd\e\\"
+      else
+        # With user/hostname
+        print -Pn "\ek%m:%40<...<%~> $cmd\e\\"
+      fi
+      ;;
+    xterm*|rxvt*)
+      # plain xterm title
+      if [[ -z $SSH_TTY ]]; then
+        print -Pn "\e]2;%40<...<%~> $cmd\a"
+      else
+        # With user/hostname
+        print -Pn "\e]2;%n@%m:%40<...<%~> $cmd\a"
+      fi
+      ;;
+  esac
+}
+
 # Get the intial timestamp for cmd_exec_time
 #
 prompt_preexec() {
-  cmd_timestamp=`date +%s`
+  title "$1"
+  # cmd_timestamp=`date +%s`
 
-	# shows the current dir and executed command in the title when a process is active
-	print -Pn "\e]0;"
-	echo -nE "$PWD:t: $2"
-	print -Pn "\a"
+	# # shows the current dir and executed command in the title when a process is active
+	# print -Pn "\e]0;"
+	# echo -nE "$PWD:t: $2"
+	# print -Pn "\a"
 }
 
 # string length ignoring ansi escapes
@@ -327,9 +365,10 @@ export NAVI_FZF_OVERRIDES="--reverse --height 20"
 # smartcase matching
 zstyle ':completion:*'  matcher-list 'm:{a-z}={A-Z}'
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 if which pyenv > /dev/null; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
   eval "$(pyenv init -)"
 fi
 
