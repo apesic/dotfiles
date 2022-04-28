@@ -6,9 +6,10 @@ set nocompatible
 call pathogen#infect()
 call pathogen#helptags()
 
-set t_Co=256
+#set t_Co=256
+set termguicolors
 
-colorscheme hybrid_material
+colorscheme citylights
 set background=dark
 let g:enable_bold_font = 1
 syntax on

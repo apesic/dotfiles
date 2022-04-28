@@ -7,8 +7,6 @@ else
   export EDITOR='nvim'
 fi
 
-eval "$(zoxide init zsh)"
-
 source ~/.aliases
 
 eval "$(rbenv init -)"
@@ -118,7 +116,7 @@ zstyle ':vcs_info:*:*' stagedstr '𝌆'
 zstyle ':vcs_info:*:*' nvcsformats "%~" "" ""
 zstyle ':vcs_info:git*' formats ' %F{8}%b %F{blue}%%u%c%f'
 zstyle ':vcs_info:git*' actionformats ' %F{8}%b %F{blue}%%u%c%f |%F{yellow}%a%f'
-FORCE_RUN_VCS_INFO=1
+#FORCE_RUN_VCS_INFO=1
 
 # Fastest possible way to check if repo is dirty
 #
@@ -301,7 +299,6 @@ export FZF_CTRL_R_OPTS="--preview 'echo {} | bat -n --color always --wrap charac
 function httpl {
     http --pretty=all --print=hb "$@" | less -R;
 }
-export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -335,9 +332,10 @@ zinit wait lucid for \
     zsh-users/zsh-autosuggestions
 
 zinit light-mode for \
-  wookayin/fzf-fasd \
   wfxr/forgit \
   Aloxaf/fzf-tab \
+  ytakahashi/igit \
+  zpm-zsh/pr-git \
   apesic/znotes
 
 zinit snippet OMZP::git-auto-fetch
@@ -383,6 +381,7 @@ if type brew &>/dev/null; then
   compinit
 fi
 
+eval "$(zoxide init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

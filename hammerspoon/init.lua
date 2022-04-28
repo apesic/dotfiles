@@ -34,15 +34,16 @@ local mashApp = {"cmd", "ctrl"}
 -- I'm not sure why this implementation has different behavior than hs.application.launchOrFocus.
 -- Reference: https://github.com/Hammerspoon/hammerspoon/issues/304
 function myLaunchOrFocus(appName)
-  local app = hs.appfinder.appFromName(appName)
-  if app == nil then
-    hs.application.launchOrFocus(appName)
-  else
-    windows = app:allWindows()
-    if windows[1] then
-      windows[1]:focus()
-    end
-  end
+  hs.application.launchOrFocus(appName)
+  -- local app = hs.appfinder.appFromName(appName)
+  -- if app == nil then
+  --   hs.application.launchOrFocus(appName)
+  -- else
+  --   windows = app:allWindows()
+  --   if windows[1] then
+  --     windows[1]:focus()
+  --   end
+  -- end
 end
 
 local windowPicker = require('window-picker')
@@ -56,7 +57,7 @@ hs.hotkey.bind(mashApp, 'V', function() myLaunchOrFocus('Visual Studio Code') en
 hs.hotkey.bind(mashApp, 'E', function() myLaunchOrFocus('IntelliJ IDEA') end)
 hs.hotkey.bind(mashApp, 'K', function() myLaunchOrFocus('Slack') end)
 hs.hotkey.bind(mashApp, 'S', function() myLaunchOrFocus('Spotify') end)
-hs.hotkey.bind(mashApp, 'G', function() myLaunchOrFocus('Gmail') end)
+-- hs.hotkey.bind(mashApp, 'G', function() myLaunchOrFocus('Gmail') end)
 
 hs.window.animationDuration = 0
 -- Left half
@@ -167,44 +168,35 @@ local workLayout = {
   {"com.googlecode.iterm2", nil, rightScreen, nil, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
-  {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
 }
 
 local laptopLayout = {
   {"Google Chrome", nil, laptop, hs.layout.maximized, nil, nil},
-  {"MacVim", nil, laptop, hs.layout.maximized, nil, nil},
-  {"Emacs", nil, laptop, hs.layout.maximized, nil, nil},
   {"Code", nil, laptop, hs.layout.maximized, nil, nil},
-  {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"IntelliJ IDEA", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Visual Studio Code", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"com.googlecode.iterm2", nil, laptop, hs.layout.maximized, nil, nil},
+  {"kitty", nil, laptop, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.maximized, nil, nil},
   {"Spotify", nil, laptop, hs.layout.maximized, nil, nil},
-  {"SoundCleod", nil, laptop, hs.layout.maximized, nil, nil},
 }
 
 local homeLayout = {
   {"Google Chrome", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"MacVim", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"Emacs", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Code", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"com.jetbrains.intellij.ce", nil, centerScreen, hs.layout.maximized, nil, nil},
+  {"IntelliJ IDEA", nil, centerScreen, hs.layout.maximized, nil, nil},
   {"Visual Studio Code", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"Gmail", nil, centerScreen, hs.layout.maximized, nil, nil},
-  {"com.googlecode.iterm2", nil, leftScreen, hs.layout.maximized, nil, nil},
+  {"kitty", nil, leftScreen, hs.layout.maximized, nil, nil},
   {"Slack", nil, laptop, hs.layout.left50, nil, nil},
   {"Spotify", nil, laptop, hs.layout.right50, nil, nil},
-  {"SoundCleod", nil, laptop, hs.layout.right50, nil, nil},
 }
 
 hs.hotkey.bind(mash, "r", function()
   switchLayout()
 end)
 
-hs.hotkey.bind(mashShift, "r", function()
-  fixRotation()
-end)
+-- hs.hotkey.bind(mashShift, "r", function()
+--   fixRotation()
+-- end)
 
 -- Screen watcher
 local lastNumberOfScreens = #hs.screen.allScreens()

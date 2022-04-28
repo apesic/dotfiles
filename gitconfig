@@ -25,6 +25,7 @@
   wip = commit -am "WIP"
   undo = reset HEAD~1 --mixed
   amend = commit -a --amend
+	noop = commit --amend --no-edit
   upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive
   # fuzzy add using fzf
 	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff --color=always {}' --preview-window=right:50%:wrap | xargs -0 -t -o git add --all"
