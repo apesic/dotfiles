@@ -24,7 +24,7 @@
   save = !git add -A && git commit -m 'SAVEPOINT'
   wip = commit -am "WIP"
   undo = reset HEAD~1 --mixed
-  amend = commit -a --amend
+  amend = commit -a --amend -C HEAD
 	noop = commit --amend --no-edit
   upsync = !git fetch --prune origin && git rebase origin/master && git submodule update --init --recursive
   # fuzzy add using fzf
