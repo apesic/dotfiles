@@ -2,8 +2,8 @@
 "let &packpath = &runtimepath
 "source ~/.vim/.vimrc
 "
-let g:python3_host_prog = '/Users/apesic/.pyenv/versions/3.9.10/bin/python'
-let g:python_host_prog = '/Users/apesic/.pyenv/versions/2.7.16/bin/python'
+"let g:python3_host_prog = '/Users/apesic/.pyenv/versions/3.9.10/bin/python'
+"let g:python_host_prog = '/Users/apesic/.pyenv/versions/2.7.16/bin/python'
 "let g:node_host_prog = '/Users/apesic/.nvm/versions/node/v14.18.2/bin/neovim-node-host'
 "let g:coc_node_path = '/Users/apesic/.nvm/versions/node/v14.18.2/bin/node'
 

@@ -12,11 +12,6 @@ source ~/.aliases
 eval "$(rbenv init -)"
 
 # Needed in Sierra to re-init ssh agent in each session
-{ eval `ssh-agent`; ssh-add -A; } &>/dev/null
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-[[ -s "$HOME/.local/share/marker/marker.sh" ]] && source "$HOME/.local/share/marker/marker.sh"
 
 # Prompts for confirmation after 'rm *' etc
 # Helps avoid mistakes like 'rm * o' when 'rm *.o' was intended
@@ -300,43 +295,47 @@ function httpl {
     http --pretty=all --print=hb "$@" | less -R;
 }
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "$ZINIT_HOME/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+#zinit ice proto"ssh" from"gitlab"
+#zinit light-mode for \
+#    zinit-zsh/z-a-rust \
+#    zinit-zsh/z-a-as-monitor \
+#    zinit-zsh/z-a-patch-dl \
+#    zinit-zsh/z-a-bin-gem-node
 
 ### End of Zinit's installer chunk
 #
+#zinit ice proto"ssh" from"gitlab"
+#zinit wait lucid for \
+# atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+#    zdharma/fast-syntax-highlighting \
+# blockf \
+#    zsh-users/zsh-completions \
+# atload"!_zsh_autosuggest_start" \
+#    zsh-users/zsh-autosuggestions
+
 zinit wait lucid for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma/fast-syntax-highlighting \
+    zdharma-continuum/fast-syntax-highlighting \
  blockf \
     zsh-users/zsh-completions \
  atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions
 
+zinit ice proto"ssh" from"gitlab"
 zinit light-mode for \
   wfxr/forgit \
-  Aloxaf/fzf-tab \
-  ytakahashi/igit \
-  zpm-zsh/pr-git \
-  apesic/znotes
+#  Aloxaf/fzf-tab \
+#  ytakahashi/igit \
+#  zpm-zsh/pr-git \
+#  apesic/znotes \
+  Aloxaf/fzf-tab
 
 zinit snippet OMZP::git-auto-fetch
 
@@ -353,8 +352,8 @@ export FORGIT_FZF_DEFAULT_OPTS="--ansi
 "
 
 # znotes
-zstyle :notes home '/Users/apesic/Sync/notes'
-bindkey '^N' notes-pick-widget
+#zstyle :notes home "$HOME/sync/notes"
+#bindkey '^N' notes-pick-widget
 
 # navi - cheatsheets
 source <(echo "$(navi widget zsh)")
@@ -384,5 +383,8 @@ fi
 eval "$(zoxide init zsh)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

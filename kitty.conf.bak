@@ -8,12 +8,12 @@
 #: individual font faces and even specify special fonts for particular
 #: characters.
 
-font_family      JetBrainsMono NF Regular
-bold_font        JetBrainsMono NF Bold
-italic_font      JetBrainsMono NF Italic
-bold_italic_font JetBrainsMono NF Bold Italic
+font_family      JetBrains Mono Regular
+bold_font        JetBrains Mono Bold
+italic_font      JetBrains Mono Italic
+bold_italic_font JetBrains Mono Bold Italic
 
-font_size 10.0
+font_size 12.0
 
 #: Font size (in pts)
 
@@ -94,7 +94,7 @@ disable_ligatures cursor
 
 #: Scrollback {{{
 
-scrollback_lines 10000
+# scrollback_lines 2000
 
 #: Number of lines of history to keep in memory for scrolling back.
 #: Memory is allocated on demand. Negative numbers are (effectively)
@@ -138,7 +138,7 @@ scrollback_lines 10000
 
 #: Mouse {{{
 
-mouse_hide_wait 2.0
+# mouse_hide_wait 3.0
 
 #: Hide mouse cursor after the specified number of seconds of the
 #: mouse not being used. Set to zero to disable mouse cursor hiding.
@@ -256,7 +256,7 @@ enable_audio_bell no
 #: Enable/disable the audio bell. Useful in environments that require
 #: silence.
 
-visual_bell_duration 0.0
+# visual_bell_duration 0.0
 
 #: Visual bell duration. Flash the screen when a bell occurs for the
 #: specified number of seconds. Set to zero to disable.
@@ -442,8 +442,8 @@ tab_title_template {index} {title}
 # active_tab_foreground   #000
 # active_tab_background   #eee
 active_tab_font_style   bold
-# inactive_tab_foreground #00e
-# inactive_tab_background #499
+inactive_tab_foreground #00e
+inactive_tab_background #499
 inactive_tab_font_style italic
 
 #: Tab bar colors and styles
@@ -763,7 +763,7 @@ macos_thicken_font 0.1
 
 #:     map ctrl+f>2 set_font_size 20
 
-kitty_mod ctrl+alt
+kitty_mod cmd+shift
 
 #: The value of kitty_mod is used as the modifier for all default
 #: shortcuts, you can change it in your kitty.conf to change the
@@ -791,9 +791,9 @@ kitty_mod ctrl+alt
 #: mapped to Ctrl+c. It will copy only if there is a selection and
 #: send an interrupt otherwise.
 
-map ctrl+c        copy_or_interrupt
+map cmd+c        copy_to_clipboard
 # map kitty_mod+v  paste_from_clipboard
-map ctrl+v        paste_from_clipboard
+map cmd+v        paste_from_clipboard
 # map kitty_mod+s  paste_from_selection
 # map shift+insert paste_from_selection
 # map kitty_mod+o  pass_selection_to_program
@@ -847,7 +847,7 @@ map ctrl+v        paste_from_clipboard
 
 #: Window management {{{
 
-#map kitty_mod+enter new_window
+# map kitty_mod+enter new_window
 
 #: You can open a new window running an arbitrary program, for
 #: example::
@@ -879,11 +879,11 @@ map ctrl+v        paste_from_clipboard
 #: kitty window. In particular you can use new_os_window_with_cwd to
 #: open a window with the current working directory.
 
-map kitty_mod+n       new_os_window
-map kitty_mod+w close_window
-#map shift+ctrl+d close_window
-map kitty_mod+l next_window
-map kitty_mod+h previous_window
+map cmd+n       new_os_window
+# map kitty_mod+w close_window
+map shift+cmd+d close_window
+#map ctrl+l next_window
+#map ctrl+h previous_window
 # map kitty_mod+f move_window_forward
 # map kitty_mod+b move_window_backward
 # map kitty_mod+` move_window_to_top
@@ -924,7 +924,7 @@ map shift+ctrl+w      next_tab
 # map kitty_mod+left  previous_tab
 map shift+ctrl+q  previous_tab
 # map shift+cmd+[     previous_tab
-map kitty_mod+t     new_tab
+# map kitty_mod+t     new_tab
 # map cmd+t           new_tab
 # map kitty_mod+q     close_tab
 # map cmd+w           close_tab
@@ -937,10 +937,10 @@ map kitty_mod+t     new_tab
 #: the first tab, 2 the second tab and -1 being the previously active
 #: tab::
 
-map ctrl+1 goto_tab 1
-map ctrl+2 goto_tab 2
-map ctrl+3 goto_tab 3
-map ctrl+4 goto_tab 4
+map cmd+1 goto_tab 1
+map cmd+2 goto_tab 2
+map cmd+3 goto_tab 3
+map cmd+4 goto_tab 4
 
 #: Just as with new_window above, you can also pass the name of
 #: arbitrary commands to run when using new_tab and use
@@ -969,12 +969,12 @@ map kitty_mod+l next_layout
 #: You can change the font size for all top-level kitty OS windows at
 #: a time or only the current one.
 
- map kitty_mod+equal     change_font_size all +2.0
-#map cmd+plus            change_font_size all +2.0
- map kitty_mod+minus     change_font_size all -2.0
-#map cmd+minus           change_font_size all -2.0
- map kitty_mod+backspace change_font_size all 0
-#map cmd+0               change_font_size all 0
+# map kitty_mod+equal     change_font_size all +2.0
+map cmd+plus            change_font_size all +2.0
+# map kitty_mod+minus     change_font_size all -2.0
+map cmd+minus           change_font_size all -2.0
+# map kitty_mod+backspace change_font_size all 0
+map cmd+0               change_font_size all 0
 
 #: To setup shortcuts for specific font sizes::
 

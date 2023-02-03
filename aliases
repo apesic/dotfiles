@@ -16,15 +16,12 @@ alias .....="cd ../../../.."
 alias -- -="cd -"
 alias C="wc -l"
 function cdl { cd $1; l;}
-function mcd { mkdir $1; cd $1 }
+function mcd { mkdir -p $1; cd $1 }
 alias c="fasd_cd -d"
 
 alias vim="nvim"
 alias vi="nvim"
 #alias tvim="mvim -v"
-
-alias postgresstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias postgresstop='pg_ctl -m fast -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop'
 
 alias j="jq '.'"
 
@@ -33,7 +30,6 @@ alias rgg='rg -t go -g "!vendor"'
 alias rgj='rg -t js -t css -t html -t less'
 alias rgm='rg -t md -C 2'
 
-alias repl='lein repl :start :port 7777'
 
 #alias t='tree -L 3 -P "*.clj|*.go|*.cljs|*.sh|*.md" -I "target|node_modules" --prune'
 alias t='exa -TFa -L 2 --group-directories-first --icons --git-ignore --color=always | bat -p'
@@ -41,8 +37,8 @@ alias tt='exa -TFa --color=always --group-directories-first --icons --git-ignore
 
 # Replacement tools
 alias cat="bat"
-alias tldr="navi --tldr"
-alias help="tldr"
+#alias tldr="navi --tldr"
+#alias help="tldr"
 
 alias ls="exa --group-directories-first --icons"
 alias l="exa -1Fa --group-directories-first --icons"
