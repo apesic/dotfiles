@@ -27,3 +27,4 @@ ln -s $SCRIPTDIR/stylelintrc .stylelintrc
 ln -s $SCRIPTDIR/starship.toml .config/starship.toml
 ln -s $SCRIPTDIR/bat .config/bat
 ln -s $SCRIPTDIR/kitty.conf .config/kitty/kitty.conf
+ln -s $SCRIPTDIR/awesome .config/awesome

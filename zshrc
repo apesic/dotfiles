@@ -331,11 +331,11 @@ zinit wait lucid for \
 zinit ice proto"ssh" from"gitlab"
 zinit light-mode for \
   wfxr/forgit \
+  Aloxaf/fzf-tab
 #  Aloxaf/fzf-tab \
 #  ytakahashi/igit \
 #  zpm-zsh/pr-git \
 #  apesic/znotes \
-  Aloxaf/fzf-tab
 
 zinit snippet OMZP::git-auto-fetch
 
@@ -388,3 +388,13 @@ export NVM_DIR="$HOME/.nvm"
 
 #[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk

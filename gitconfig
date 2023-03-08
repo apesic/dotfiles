@@ -59,3 +59,6 @@
 	first-run = false
 [credential]
 	helper = store
+[safe]
+	directory = /opt/flutter
+	directory = /opt/flutter

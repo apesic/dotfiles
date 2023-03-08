@@ -22,8 +22,6 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
-  Plug 'neoclide/coc.nvim', { 'do': 'yarn install' }
   Plug 'Olical/conjure', { 'tag': 'v2.1.0', 'do': 'bin/compile' }
   Plug 'vimwiki/vimwiki'
   Plug 'bling/vim-airline'
