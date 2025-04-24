@@ -10,7 +10,7 @@ local home = os.getenv("HOME")
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 -- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init(home .. "/.config/awesome/themes/clone/theme.lua")
+beautiful.init(home .. "/.config/awesome/themes/powerarrow-dark/theme.lua")
 
 if (RC.vars.wallpaper) then
     local wallpaper = RC.vars.wallpaper

@@ -8,7 +8,7 @@ fi
 export REPOS="$HOME/src"
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$REPOS/flutter/bin:$PATH"
+export PATH="/opt/flutter/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 #export PYTHONPATH="$REPOS/liftoff/workbench/python/liftoff:$PYTHONPATH"
 export PGDATA="/usr/local/var/postgres"
@@ -21,6 +21,7 @@ export LEIN_REPL_PORT=7777
 export GRAAL_HOME="/usr/local/graalvm/Contents/Home/"
 #export JAVA_HOME="/usr/local/graalvm/Contents/Home/"
 export PATH="/usr/local/graalvm/Contents/Home/bin:$PATH"
+export PATH="/home/alexei/.platformio/penv/bin:$PATH"
 export BAT_THEME="TwoDark"
 export LIFTOFF_VENV_ROOT="$HOME/.venv"
 

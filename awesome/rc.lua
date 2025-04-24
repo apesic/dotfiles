@@ -1,8 +1,6 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
-RC = {} -- global namespace, on top before require any modules
-
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -16,12 +14,16 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+RC = {} -- global namespace, on top before require any modules
+RC.vars = require("main.user-variables")
+awful.util.terminal = RC.vars.terminal
+
 -- Error handling
 require("main.errors")
+require("main.theme")
 
 require("main.signals")
 
-RC.vars = require("main.user-variables")
 -- Custom Local Library
 local main = {
   layouts = require("main.layouts"),
@@ -63,9 +65,6 @@ RC.globalkeys = binding.bindtotags(RC.globalkeys)
 root.buttons(binding.globalbuttons())
 root.keys(RC.globalkeys)
 
--- {{{ Variable definitions
--- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = RC.vars.terminal

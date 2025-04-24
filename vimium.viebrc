@@ -1,0 +1,70 @@
+" Options
+set adblocker=update
+set downloadmethod=confirm
+set mintabwidth=250
+set norestoretabs
+set nofollownewtabswitch
+set redirecttohttp
+set tabreopenposition=previous
+set search=https://google.com/search?q=%s
+set searchwords=w~https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s
+set timeout=false
+
+" Mappings
+nmap i <toInsertMode>
+nmap v <p.start><p.startVisualSelect>
+nmap gi <insertAtFirstInput>
+nmap f <startFollowCurrentTab>
+nmap F <startFollowNewTab>
+nmap q <previousTab>
+nmap w <nextTab>
+nmap / <toSearchMode>
+nmap n <nextSearchMatch>
+nmap N <previousSearchMatch>
+nmap gg <scrollTop>
+nmap G <scrollBottom>
+nmap d <scrollPageDownHalf>
+nmap e <scrollPageUpHalf>
+nmap p <openFromClipboard>
+nmap P <openNewTab><openFromClipboard>
+nmap gu <toParentUrl>
+nmap gU <toRootUrl>
+nmap yf <p.start><startFollowCurrentTab>
+nunmap [
+nunmap ]
+nmap [[ <previousPage>
+nmap ]] <nextPage>
+nmap v <p.start><p.startVisualSelect>
+nmap o <toExploreMode>
+nmap O <openNewTab><toExploreMode>
+nmap T <toCommandMode>buffer<Space>
+nmap g0 <:buffer
+nmap g$ <:buffer
+nmap J <previousTab>
+nmap K <nextTab>
+nmap ^ <:buffer #>
+nmap ge <toExploreMode><End>
+nmap gE <openNewTab><toExploreMode>
+nmap x <:close>
+nmap X <reopenTab>
+nmap H <backInHistory>
+nmap L <forwardInHistory>
+nmap <A-p> <:pin>
+nmap <A-m> <:mute>
+nmap <A-1> <:buffer 0>
+nmap <A-2> <:buffer 1>
+nmap <A-3> <:buffer 2>
+nmap <A-4> <:buffer 3>
+nmap <A-5> <:buffer 4>
+nmap <A-6> <:buffer 5>
+nmap <A-7> <:buffer 6>
+nmap <A-8> <:buffer 7>
+nmap <A-9> <:buffer 8>
+nmap <A-0> <:buffer -1>
+nmap t <openNewTab>
+nmap yt <openNewTabWithCurrentUrl><CR>
+nmap <lt><lt> <moveTabBackward>
+nmap >> <moveTabForward>
+nmap ? <:help>
+
+" vim: ft=vim

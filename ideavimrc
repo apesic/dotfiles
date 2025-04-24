@@ -1,21 +1,8 @@
 "source ~/.vimrc
+let mapleader = " "
 
 set visualbell
 set noerrorbells
-
-let mapleader = " "
-
-nnoremap ; :
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-map <Tab> %
-map Y y$
-noremap K <Nop>
-
-set ideajoin
-set showmode
-set scrolloff=3
-set sidescrolloff=3
 
 " plugins
 set surround
@@ -26,6 +13,24 @@ set exchange
 set highlightedyank
 set argtextobj
 set NERDTree
+set quickscope
+
+set ideajoin
+set showmode
+set scrolloff=3
+set sidescrolloff=3
+
+
+nnoremap ; :
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+map <Tab> %
+map Y y$
+noremap K <Nop>
+
+let g:qs_highlight_on_keys = ['f', 't']
 
 " Integrate with system clipboard
 set clipboard=ideaput,unnamedplus,unnamed
@@ -40,59 +45,64 @@ set hlsearch
 nnoremap <leader>, :noh<cr>
 
 " vim delete and change, with sexps!
-map <leader>x :action :cursive.actions.paredit/kill-sexp<CR>
-map <leader>D :action :cursive.actions.paredit/kill<CR>
-map <leader>c :action :cursive.actions.paredit/kill<CR>i
+"map <leader>x :action :cursive.actions.paredit/kill-sexp<CR>
+"map <leader>D :action :cursive.actions.paredit/kill<CR>
+"map <leader>c :action :cursive.actions.paredit/kill<CR>i
 
 " Since kill copies to system clipboard, it's nice to have easy access to clipboard paste
-map <leader>p +p
+"map <leader>p +p
 
 " Sexp editing mappings straight from paredit.vim
-map <leader>J :action :cursive.actions.paredit/join<CR>
-map <leader>O :action :cursive.actions.paredit/split<CR>
-map <leader>S :action :cursive.actions.paredit/splice<CR>
-map <leader>I :action :cursive.actions.paredit/raise<CR>
+" map <leader>J :action :cursive.actions.paredit/join<CR>
+" map <leader>O :action :cursive.actions.paredit/split<CR>
+" map <leader>S :action :cursive.actions.paredit/splice<CR>
+" map <leader>I :action :cursive.actions.paredit/raise<CR>
 
 " Slurp and barf
-map <leader>< :action :cursive.actions.paredit/barf-forwards<CR>
-map <leader>> :action :cursive.actions.paredit/slurp-forwards<CR>
+" map <leader>< :action :cursive.actions.paredit/barf-forwards<CR>
+" map <leader>> :action :cursive.actions.paredit/slurp-forwards<CR>
 " map <leader>L :action :cursive.actions.paredit/slurp-backwards<CR>
 " map <leader>H :action :cursive.actions.paredit/barf-backwards<CR>
 
 " leader + wrapping symbol for wrapping
-map <leader>( :action :cursive.actions.paredit/wrap-paren<CR>
-map <leader>[ :action :cursive.actions.paredit/wrap-square<CR>
-map <leader>{ :action :cursive.actions.paredit/wrap-curly<CR>
-map <leader>" :action :cursive.actions.paredit/wrap-quotes<CR>
+" map <leader>( :action :cursive.actions.paredit/wrap-paren<CR>
+" map <leader>[ :action :cursive.actions.paredit/wrap-square<CR>
+" map <leader>{ :action :cursive.actions.paredit/wrap-curly<CR>
+" map <leader>" :action :cursive.actions.paredit/wrap-quotes<CR>
 
 " Cycle collection
 " map <leader>C :action :cursive.actions.paredit/cycle-collection-type<CR>
 
 " Evaluate sexp like in vim-fireplace
-map cpp :action :cursive.repl.actions/run-top-sexp<CR>
-map cpr :action :cursive.repl.actions/load-file<CR>
-map crt :action :cursive.testing.actions/rerun-last-test<CR>
-map cpt :action :cursive.testing.actions/run-ns-tests<CR>
+" map cpp :action :cursive.repl.actions/run-top-sexp<CR>
+" map cpr :action :cursive.repl.actions/load-file<CR>
+" map crt :action :cursive.testing.actions/rerun-last-test<CR>
+" map cpt :action :cursive.testing.actions/run-ns-tests<CR>
 
 " Force a single "parinference" when in paredit mode and reformat
-map <leader>rp :action :cursive.actions.paredit/toggle<CR>:action :cursive.actions.paredit/toggle<CR>kj:action :cursive.actions.paredit/toggle<CR>:action ReformatCode<CR>
+" map <leader>rp :action :cursive.actions.paredit/toggle<CR>:action :cursive.actions.paredit/toggle<CR>kj:action :cursive.actions.paredit/toggle<CR>:action ReformatCode<CR>
 
 nmap <C-f> :action GotoFile<cr>
 "nmap <leader>c :action GotoClass<cr>
 nmap <leader>ns :action GotoSymbol<cr>
 nmap <leader>nm :action FileStructurePopup<cr>
 nmap gh :action ShowErrorDescription<cr>
-nmap <leader>g :action QuickJavaDoc<cr>
+nmap gq :action QuickJavaDoc<cr>
 nmap gd :action GotoDeclaration<cr>
 nmap gi :action GotoImplementation<cr>
 
-map <leader>t :action JumpToLastWindow<CR>
+" Tool windows
+map <leader>wt :action JumpToLastWindow<CR>
+map <C-q> :action HideActiveWindow<CR>
+map <leader>ww :action HideAllWindows<CR>
+map <leader>wg :action ActivateVersionControlToolWindow<CR>
+map <leader>wc :action ActivateCommitToolWindow<CR>
 
-" Press `f` to activate AceJump
+let g:EasyMotion_smartcase = 1
 map ' <Plug>(easymotion-prefix)
 "map f <Plug>(easymotion-fl)
 map F <Plug>(easymotion-bd-f)
-map K <Plug>(easymotion-bd-jk)
+"map K <Plug>(easymotion-bd-jk)
 
 " Refactoring
 map <leader>rr :action RenameElement<CR>
@@ -101,8 +111,8 @@ map <leader>rt :action Refactorings.QuickListPopupAction<CR>
 map <leader>i :action ShowIntentionActions<CR>
 
 " Debugging
-map <leader>bt :action ToggleLineBreakpoint<CR>
-map <leader>bm :action XDebugger.MuteBreakpoints<CR>
+map <leader>dt :action ToggleLineBreakpoint<CR>
+map <leader>dm :action XDebugger.MuteBreakpoints<CR>
 map <leader>dd :action Debug<CR>
 map <leader>do :action StepOver<CR>
 map <leader>di :action StepInto<CR>
@@ -110,9 +120,11 @@ map <leader>dr :action Resume<CR>
 map <leader>dx :action Stop<CR>
 
 " Version control
-"" git add line
+" git add line
 map <leader>gal :action ChangesView.AddUnversioned<CR>
-"" git add all
+" git add all
 map <leader>gaa :action Git.Add<CR>
-"" git log
+" git log
 map <leader>gl :action Vcs.Show.Log<CR>
+
+
